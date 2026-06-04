@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ca009f7fd353c4dbefff28997f76d9, type: 3}
+  m_Name: WeaponDetails_RPG
+  m_EditorClassIdentifier: 
+  weaponName: RPG
+  weaponSprite: {fileID: 21300000, guid: 8a4a7da6cff33ed46bef5ec1d7d2b61a, type: 3}
+  weaponShootPosition: {x: 0.62, y: 0.03, z: 0}
+  weaponCurrentAmmo: {fileID: 11400000, guid: f77f3e98ab9cabc45aa1a7109e6b3499, type: 2}
+  weaponShootEffect: {fileID: 11400000, guid: 5bc1a20a2f2f376439b2d6a7b1bff4b2, type: 2}
+  weaponFiringSoundEffect: {fileID: 11400000, guid: 32efd3e831983ee4e911b0cd41f19d09, type: 2}
+  weaponReloadSoundEffect: {fileID: 11400000, guid: db629f333e4012e44a8fa077d7fd804f, type: 2}
+  weaponSlugInsertSoundEffect: {fileID: 0}
+  weaponPumpSoundEffect: {fileID: 0}
+  weaponPumpSoundDelay: 0.15
+  isShellByShellReload: 0
+  weaponShellInsertTime: 0.5
+  weaponReloadTime: 5
+  fireMode: 0
+  hasInfiniteAmmo: 0
+  hasInfiniteClipCapacity: 0
+  weaponClipAmmoCapacity: 1
+  weaponAmmoCapacity: 10
+  weaponFireRate: 1
+  weaponPrechargeTime: 0

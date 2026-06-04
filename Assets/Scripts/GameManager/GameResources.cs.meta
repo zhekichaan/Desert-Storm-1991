@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 33c4298e08055414ba28b7e4e11a5560
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - roomNodeTypeList: {instanceID: 0}
+  - playerSelectionPrefab: {fileID: 5036243169920591789, guid: bdb3f55165b98a74c8dda2b4e5f96c84, type: 3}
+  - currentPlayer: {instanceID: 0}
+  - soundsMasterMixerGroup: {fileID: -4734643798044506327, guid: f7d4c21fe8023db479060fd88bd74b5c, type: 2}
+  - dimmedMaterial: {instanceID: 0}
+  - litMaterial: {instanceID: 0}
+  - variableLitShader: {instanceID: 0}
+  - ammoIconPrefab: {fileID: 1091751083442854604, guid: 888602f716963ee42916f89dc2f7670c, type: 3}
+  - scorePrefab: {fileID: 3347675112470752542, guid: 388c73f44ea0c7540a627f8f1c1f1e77, type: 3}
+  - minimapSkullPrefab: {fileID: 1249288027922156231, guid: f042f4272a4519e4585583bbdd5daa03, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

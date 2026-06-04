@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2db594338f8ac264297cb2b869422d53, type: 3}
+  m_Name: AmmoDetails_M60
+  m_EditorClassIdentifier: 
+  ammoName: M60 Ammo
+  isPlayerAmmo: 1
+  ammoSprite: {fileID: 21300000, guid: 19836077f298ac9458ee90d412f71e23, type: 3}
+  ammoPrefabArray:
+  - {fileID: 430225475704623527, guid: 0e57045cdc6e356429026a08f5e950f5, type: 3}
+  ammoMaterial: {fileID: 2100000, guid: dafa1a11ed3354046b863a32ddcbed0f, type: 2}
+  ammoChargeTime: 0
+  ammoChargeMaterial: {fileID: 0}
+  ammoHitEffect: {fileID: 11400000, guid: 3a4eb042be8079a4d88c894135f64784, type: 2}
+  ammoDamage: 20
+  ammoSpeedMin: 45
+  ammoSpeedMax: 45
+  ammoRange: 25
+  ammoRotationSpeed: 1
+  ammoSpreadMin: 2
+  ammoSpreadMax: 5
+  ammoSpawnAmountMin: 1
+  ammoSpawnAmountMax: 1
+  ammoSpawnIntervalMin: 0
+  ammoSpawnIntervalMax: 0
+  isAmmoTrail: 0
+  ammoTrailTime: 0
+  ammoTrailMaterial: {fileID: 0}
+  ammoTrailStartWidth: 0
+  ammoTrailEndWidth: 0

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ca009f7fd353c4dbefff28997f76d9, type: 3}
+  m_Name: WeaponDetails_LAW
+  m_EditorClassIdentifier: 
+  weaponName: LAW
+  weaponSprite: {fileID: 21300000, guid: 55869e6a62f80574cbac1f3b469cddfd, type: 3}
+  weaponShootPosition: {x: 0.62, y: 0.03, z: 0}
+  weaponCurrentAmmo: {fileID: 11400000, guid: fa8cba89f1d2f564eae1f88b9b905645, type: 2}
+  weaponShootEffect: {fileID: 11400000, guid: 95cef3b0967e0ae418fafbd3a761c710, type: 2}
+  weaponFiringSoundEffect: {fileID: 11400000, guid: 0ee534a553beffa429dd1a21aa45e854, type: 2}
+  weaponReloadSoundEffect: {fileID: 11400000, guid: a72447772e1dafb4db828ad922bda748, type: 2}
+  weaponSlugInsertSoundEffect: {fileID: 0}
+  weaponPumpSoundEffect: {fileID: 0}
+  weaponPumpSoundDelay: 0.15
+  isShellByShellReload: 0
+  weaponShellInsertTime: 0.5
+  weaponReloadTime: 5
+  fireMode: 0
+  hasInfiniteAmmo: 0
+  hasInfiniteClipCapacity: 0
+  weaponClipAmmoCapacity: 1
+  weaponAmmoCapacity: 10
+  weaponFireRate: 1
+  weaponPrechargeTime: 0

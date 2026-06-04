@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51b38679d5828544933a2ee2cecc634, type: 3}
+  m_Name: DungeonLevel_3
+  m_EditorClassIdentifier: 
+  levelName: Ruined City
+  roomTemplateList:
+  - {fileID: 11400000, guid: 5a260f620c664624fb468c98c5f6db8a, type: 2}
+  - {fileID: 11400000, guid: dc9130ab5682a564c899212471c6df5c, type: 2}
+  - {fileID: 11400000, guid: 1d7cbf88dae99574db408be924d61575, type: 2}
+  - {fileID: 11400000, guid: eb30b67f2b9b4094e9b4af95ed0dada6, type: 2}
+  - {fileID: 11400000, guid: 72e5a00620f75dd40ad0d362657da1d1, type: 2}
+  - {fileID: 11400000, guid: b90ea17b48eb39c4aa6b6f1e196af1e2, type: 2}
+  - {fileID: 11400000, guid: 1de55fa0ac0e0d5468dd4ba4088b43b4, type: 2}
+  - {fileID: 11400000, guid: 7a52b0af54189e645a6a5ebd8e339590, type: 2}
+  - {fileID: 11400000, guid: 330b61be52ba5234dab4574dbffbea4b, type: 2}
+  - {fileID: 11400000, guid: 5fce2a3b7f8cf374d9a485c8e45b397b, type: 2}
+  roomNodeGraphList:
+  - {fileID: 11400000, guid: 2876e375f898f564284eb05355b2cc44, type: 2}
+  - {fileID: 11400000, guid: 44cd25fa91215da4783fbe5ab1d3b87a, type: 2}
+  - {fileID: 11400000, guid: 15a79f4a63718fc4aaa944dedf9d2c12, type: 2}

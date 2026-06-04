@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae72d225b9d0754f862cb341f8f4134, type: 3}
+  m_Name: EnemyDetails_Sniper_Dragunov
+  m_EditorClassIdentifier: 
+  enemyName: Sniper_Dragunov
+  enemyPrefab: {fileID: 7578443925779321689, guid: 06e8aad47c9f37f4bb17282dead9f3f1, type: 3}
+  chaseDistance: 50
+  enemyStandardMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  enemyMaterializeTime: 2
+  enemyMaterializeShader: {fileID: -6465566751694194690, guid: 25d60a592a9798f41b091cd1a763e59e, type: 3}
+  enemyMaterializeColor: {r: 0.9411765, g: 0.5373283, b: 0, a: 0}
+  enemyWeapon: {fileID: 11400000, guid: ef50d5f66d28d4145ae29f1fcdf87752, type: 2}
+  firingIntervalMin: 0.8
+  firingIntervalMax: 1.3
+  firingDurationMin: 6
+  firingDurationMax: 8
+  firingLineOfSightRequired: 1
+  enemyHealthDetailsArray:
+  - dungeonLevel: {fileID: 11400000, guid: 7ea5707d1fb74ad4b98c6087b4ee85c7, type: 2}
+    enemyHealthAmount: 12
+  - dungeonLevel: {fileID: 11400000, guid: d4bce04898117374594fcf1a5c3b11aa, type: 2}
+    enemyHealthAmount: 35
+  - dungeonLevel: {fileID: 11400000, guid: 0430c9a644903ca4f8cb90f9b5982630, type: 2}
+    enemyHealthAmount: 50
+  - dungeonLevel: {fileID: 11400000, guid: c6e5bae369a8c804ea84725e0fe59493, type: 2}
+    enemyHealthAmount: 60
+  isImmuneAfterHit: 0
+  hitImmunityTime: 0
+  isHealthBarDisplayed: 0

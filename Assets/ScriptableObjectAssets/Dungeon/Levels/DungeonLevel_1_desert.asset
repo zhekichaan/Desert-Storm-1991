@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51b38679d5828544933a2ee2cecc634, type: 3}
+  m_Name: DungeonLevel_1_desert
+  m_EditorClassIdentifier: 
+  levelName: The Gulf
+  roomTemplateList:
+  - {fileID: 11400000, guid: e9bd427f0df41c94994deeb366875281, type: 2}
+  - {fileID: 11400000, guid: e3cd615314ce6d74da48e4c520f8a5d3, type: 2}
+  - {fileID: 11400000, guid: 7ade4ea9dd1a310419fe60c6466a0c65, type: 2}
+  - {fileID: 11400000, guid: c6c137f831a2d8a47a07412b20cabcd1, type: 2}
+  - {fileID: 11400000, guid: e40f4c6f984a37747bbef92686f1bd2b, type: 2}
+  - {fileID: 11400000, guid: 7877f895329dba940b2e12d153348548, type: 2}
+  - {fileID: 11400000, guid: 9763c9b79451ad2429c9dd33fce9171a, type: 2}
+  - {fileID: 11400000, guid: 0c1c0917be740e845bdfff1d44f3628b, type: 2}
+  - {fileID: 11400000, guid: 961453f953b6f67419bc480d130d622c, type: 2}
+  - {fileID: 11400000, guid: 1c72e014a6da3dd42b91169d1184b183, type: 2}
+  - {fileID: 11400000, guid: 1d9a6c75c839de143aaab565001e2d23, type: 2}
+  - {fileID: 11400000, guid: 37afb893dd7c2ef4485fa9d75b753721, type: 2}
+  - {fileID: 11400000, guid: 3c92d33ce4c9fd84ead62e6f419083ee, type: 2}
+  - {fileID: 11400000, guid: b6e4ee2477e24ab4884e96f2ef070d45, type: 2}
+  roomNodeGraphList:
+  - {fileID: 11400000, guid: 9321cccad5705874a8058a5ea14abae0, type: 2}
+  - {fileID: 11400000, guid: c80321ac3e0e8d04499dffcb548f577a, type: 2}
+  - {fileID: 11400000, guid: 2bbf3ced723008840b13caee3c670e0b, type: 2}
+  - {fileID: 11400000, guid: c55f56dc9014c1247bbb85c31cb5c1f8, type: 2}
+  - {fileID: 11400000, guid: 221e73344373bd644b974035fea948de, type: 2}
+  - {fileID: 11400000, guid: f94396b144edebc458cb438a35befae8, type: 2}

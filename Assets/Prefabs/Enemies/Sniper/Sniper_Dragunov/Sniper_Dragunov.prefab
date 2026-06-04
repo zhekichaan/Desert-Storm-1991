@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4361793017681525317
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 112511977476557515, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
+      value: -0.28147578
+      objectReference: {fileID: 0}
+    - target: {fileID: 112511977476557515, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
+      value: 0.18814144
+      objectReference: {fileID: 0}
+    - target: {fileID: 112511977476557515, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[8].x
+      value: 0.27880123
+      objectReference: {fileID: 0}
+    - target: {fileID: 112511977476557515, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[8].y
+      value: 0.18573439
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908396432420695998, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908396432420695998, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908396432420695998, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908396432420695998, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908396432420695998, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908396432420695998, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908396432420695998, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908396432420695998, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908396432420695998, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908396432420695998, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5233153031946171471, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1078219847, guid: cc754c5541c9d954f8f15cd1eb2b1ed6, type: 3}
+    - target: {fileID: 5329715283377342249, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: enemyDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 44b76c6955933be4e80a137680b1e442, type: 2}
+    - target: {fileID: 6171120314582608156, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_Name
+      value: Sniper_Dragunov
+      objectReference: {fileID: 0}
+    - target: {fileID: 7048802573864982935, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9af7869a98f83cd41b66cd85ba451266, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 66c262ce73daf1e47b295a1a1aba2680, type: 3}

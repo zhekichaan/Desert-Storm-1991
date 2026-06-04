@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8813279184719273188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1408041792139827412}
+  - component: {fileID: -6531078034192111770}
+  m_Layer: 0
+  m_Name: ChestSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1408041792139827412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8813279184719273188}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6531078034192111770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8813279184719273188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863c424fe66e0824e90d59b77c6c2328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chestPrefab: {fileID: 1648866826651415531, guid: 8cbb99ab5e2eb7147902ffa53d0e8e4e, type: 3}
+  chestSpawnChanceMin: 0
+  chestSpawnChanceMax: 100
+  chestSpawnChanceByLevelList:
+  - dungeonLevel: {fileID: 11400000, guid: 7ea5707d1fb74ad4b98c6087b4ee85c7, type: 2}
+    min: 0
+    max: 100
+  - dungeonLevel: {fileID: 11400000, guid: d4bce04898117374594fcf1a5c3b11aa, type: 2}
+    min: 0
+    max: 100
+  - dungeonLevel: {fileID: 11400000, guid: 0430c9a644903ca4f8cb90f9b5982630, type: 2}
+    min: 0
+    max: 100
+  chestSpawnEvent: 0
+  chestSpawnPosition: 0
+  numberOfItemsToSpawnMin: 2
+  numberOfItemsToSpawnMax: 3
+  weaponSpawnByLevelList:
+  - dungeonLevel: {fileID: 11400000, guid: 7ea5707d1fb74ad4b98c6087b4ee85c7, type: 2}
+    spawnableObjectRatioList: []
+  - dungeonLevel: {fileID: 11400000, guid: d4bce04898117374594fcf1a5c3b11aa, type: 2}
+    spawnableObjectRatioList: []
+  - dungeonLevel: {fileID: 11400000, guid: 0430c9a644903ca4f8cb90f9b5982630, type: 2}
+    spawnableObjectRatioList: []
+  healthSpawnByLevelList:
+  - dungeonLevel: {fileID: 11400000, guid: 7ea5707d1fb74ad4b98c6087b4ee85c7, type: 2}
+    min: 30
+    max: 50
+  - dungeonLevel: {fileID: 11400000, guid: d4bce04898117374594fcf1a5c3b11aa, type: 2}
+    min: 40
+    max: 60
+  - dungeonLevel: {fileID: 11400000, guid: 0430c9a644903ca4f8cb90f9b5982630, type: 2}
+    min: 50
+    max: 70
+  ammoSpawnByLevelList:
+  - dungeonLevel: {fileID: 11400000, guid: 7ea5707d1fb74ad4b98c6087b4ee85c7, type: 2}
+    min: 30
+    max: 50
+  - dungeonLevel: {fileID: 11400000, guid: d4bce04898117374594fcf1a5c3b11aa, type: 2}
+    min: 40
+    max: 60
+  - dungeonLevel: {fileID: 11400000, guid: 0430c9a644903ca4f8cb90f9b5982630, type: 2}
+    min: 50
+    max: 70

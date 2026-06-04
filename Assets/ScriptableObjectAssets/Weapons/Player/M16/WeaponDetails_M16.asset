@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ca009f7fd353c4dbefff28997f76d9, type: 3}
+  m_Name: WeaponDetails_M16
+  m_EditorClassIdentifier: 
+  weaponName: M16
+  weaponSprite: {fileID: 21300000, guid: dce4e9382e61a0f49be6bde2349c0254, type: 3}
+  weaponShootPosition: {x: 0.9, y: 0.17, z: 0}
+  weaponCurrentAmmo: {fileID: 11400000, guid: 6670608fdaedb304e98f2e87236664f1, type: 2}
+  weaponShootEffect: {fileID: 11400000, guid: 1a76644f05978ce4b87a43ef9e013635, type: 2}
+  weaponFiringSoundEffect: {fileID: 11400000, guid: 568db707a9e1432419c2fb3a678a70ae, type: 2}
+  weaponReloadSoundEffect: {fileID: 11400000, guid: 0653a158a9c163142850d77051e21260, type: 2}
+  weaponSlugInsertSoundEffect: {fileID: 0}
+  weaponPumpSoundEffect: {fileID: 0}
+  weaponPumpSoundDelay: 0.15
+  isShellByShellReload: 0
+  weaponShellInsertTime: 0.5
+  weaponReloadTime: 2
+  fireMode: 0
+  hasInfiniteAmmo: 0
+  hasInfiniteClipCapacity: 0
+  weaponClipAmmoCapacity: 20
+  weaponAmmoCapacity: 60
+  weaponFireRate: 0.13
+  weaponPrechargeTime: 0

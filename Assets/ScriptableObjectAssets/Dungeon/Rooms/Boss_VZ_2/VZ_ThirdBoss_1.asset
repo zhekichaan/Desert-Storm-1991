@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 490d8ddb13d48dd419a051eaa5a563dd, type: 3}
+  m_Name: VZ_ThirdBoss_1
+  m_EditorClassIdentifier: 
+  guid: dab782a23073be440a4e5259c7bcbfe6
+  prefab: {fileID: 321870976318161510, guid: 0cb8223acc7918d4eb184f15c9894523, type: 3}
+  previousPrefab: {fileID: 321870976318161510, guid: 0cb8223acc7918d4eb184f15c9894523, type: 3}
+  battleMusic: {fileID: 11400000, guid: a83a36d5c902d0d40b273e7d642a622c, type: 2}
+  ambientMusic: {fileID: 11400000, guid: ef3961e92835dbc449c96bf0b14332cd, type: 2}
+  roomNodeType: {fileID: 11400000, guid: aefc00a3ca5e49d49b33da6d2dbf394f, type: 2}
+  lowerBounds: {x: -39, y: -64}
+  upperBounds: {x: 40, y: 16}
+  doorwayList:
+  - position: {x: -28, y: 16}
+    orientation: 0
+    doorPrefab: {fileID: 0}
+    doorwayStartCopyPosition: {x: -30, y: 16}
+    doorwayCopyTileWidth: 3
+    doorwayCopyTileHeight: 1
+    isConnected: 0
+    isUnavailable: 0
+  - position: {x: 40, y: -6}
+    orientation: 1
+    doorPrefab: {fileID: 0}
+    doorwayStartCopyPosition: {x: 40, y: -4}
+    doorwayCopyTileWidth: 1
+    doorwayCopyTileHeight: 3
+    isConnected: 0
+    isUnavailable: 0
+  - position: {x: 0, y: -64}
+    orientation: 2
+    doorPrefab: {fileID: 0}
+    doorwayStartCopyPosition: {x: -2, y: -64}
+    doorwayCopyTileWidth: 3
+    doorwayCopyTileHeight: 1
+    isConnected: 0
+    isUnavailable: 0
+  - position: {x: -39, y: -47}
+    orientation: 3
+    doorPrefab: {fileID: 0}
+    doorwayStartCopyPosition: {x: -39, y: -45}
+    doorwayCopyTileWidth: 1
+    doorwayCopyTileHeight: 3
+    isConnected: 0
+    isUnavailable: 0
+  - position: {x: 40, y: -47}
+    orientation: 1
+    doorPrefab: {fileID: 0}
+    doorwayStartCopyPosition: {x: 40, y: -45}
+    doorwayCopyTileWidth: 1
+    doorwayCopyTileHeight: 3
+    isConnected: 0
+    isUnavailable: 0
+  spawnPositionArray:
+  - {x: -17, y: -46}
+  - {x: 23, y: -46}
+  - {x: 24, y: -33}
+  - {x: 2, y: -33}
+  - {x: -16, y: -34}
+  - {x: -28, y: -31}
+  - {x: -20, y: -27}
+  - {x: -11, y: -28}
+  - {x: 3, y: -24}
+  - {x: 17, y: -19}
+  - {x: 36, y: -26}
+  - {x: 11, y: -14}
+  - {x: -3, y: -15}
+  - {x: -11, y: -9}
+  - {x: -33, y: -6}
+  - {x: -28, y: -4}
+  - {x: 24, y: 4}
+  enemiesByLevelList:
+  - dungeonLevel: {fileID: 11400000, guid: 0430c9a644903ca4f8cb90f9b5982630, type: 2}
+    spawnableObjectRatioList:
+    - dungeonObject: {fileID: 11400000, guid: 1395a7916523b614685a555cd932393a, type: 2}
+      ratio: 2
+  roomEnemySpawnParametersList:
+  - dungeonLevel: {fileID: 11400000, guid: 0430c9a644903ca4f8cb90f9b5982630, type: 2}
+    minTotalEnemiesToSpawn: 2
+    maxTotalEnemiesToSpawn: 2
+    minConcurrentEnemies: 2
+    maxConcurrentEnemies: 2
+    minSpawnInterval: 3
+    maxSpawnInterval: 5

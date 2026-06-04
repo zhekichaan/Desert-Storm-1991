@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ca009f7fd353c4dbefff28997f76d9, type: 3}
+  m_Name: WeaponDetails_PM
+  m_EditorClassIdentifier: 
+  weaponName: PM
+  weaponSprite: {fileID: 21300000, guid: f13ecb24b506276459dcfb1b17832748, type: 3}
+  weaponShootPosition: {x: 0.588, y: 0.187, z: 0}
+  weaponCurrentAmmo: {fileID: 11400000, guid: e0eda01e8236f12458138559840a45e9, type: 2}
+  weaponShootEffect: {fileID: 11400000, guid: 44571d542a2b876448a7255c5e437d3d, type: 2}
+  weaponFiringSoundEffect: {fileID: 11400000, guid: b9058e65dd6b5634eaffcbe3b0539736, type: 2}
+  weaponReloadSoundEffect: {fileID: 11400000, guid: 3df2b4ccd464c0744a29281c53baa13e, type: 2}
+  weaponSlugInsertSoundEffect: {fileID: 0}
+  weaponPumpSoundEffect: {fileID: 0}
+  weaponPumpSoundDelay: 0.15
+  isShellByShellReload: 0
+  weaponShellInsertTime: 0.5
+  weaponReloadTime: 1.3
+  fireMode: 0
+  hasInfiniteAmmo: 1
+  hasInfiniteClipCapacity: 0
+  weaponClipAmmoCapacity: 8
+  weaponAmmoCapacity: 0
+  weaponFireRate: 0.17
+  weaponPrechargeTime: 0

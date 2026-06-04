@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e095d29bd2efae4458ca7772e5c1a61c, type: 3}
+  m_Name: PlayerDetails_Recon
+  m_EditorClassIdentifier: 
+  playerCharacterName: Recon
+  playerPrefab: {fileID: 6755995153585222774, guid: e792e2707ff01924b8a19754f2b4f968, type: 3}
+  runtimeAnimatorController: {fileID: 9100000, guid: ed6e2e7079a64774085a55e62e9bebb4, type: 2}
+  playerHealthAmount: 80
+  isImmuneAfterHit: 1
+  hitImmunityTime: 4
+  startingWeapon: {fileID: 11400000, guid: 43f10c8f0f7e74f49b2c49857dce1cbe, type: 2}
+  startingWeaponList:
+  - {fileID: 11400000, guid: 43f10c8f0f7e74f49b2c49857dce1cbe, type: 2}
+  playerMiniMapIcon: {fileID: 21300000, guid: e51fbc912fd7201408f925296ee06285, type: 3}
+  playerHandSprite: {fileID: 21300000, guid: 046e2e6a11184554ba480387b84f17e1, type: 3}

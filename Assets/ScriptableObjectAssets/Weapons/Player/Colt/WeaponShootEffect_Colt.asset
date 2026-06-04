@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8978e9fd73f16694fabebd539438c99f, type: 3}
+  m_Name: WeaponShootEffect_Colt
+  m_EditorClassIdentifier: 
+  colorGradient:
+    serializedVersion: 2
+    key0: {r: 0.89433956, g: 0.14680664, b: 0.14680664, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 1, g: 0.95026934, b: 0, a: 0}
+    key3: {r: 1, g: 1, b: 1, a: 0}
+    key4: {r: 0.22039872, g: 0.5604274, b: 0.7735849, a: 0}
+    key5: {r: 1, g: 1, b: 1, a: 0}
+    key6: {r: 0.6377357, g: 0.6377357, b: 0.6377357, a: 0}
+    key7: {r: 1, g: 1, b: 1, a: 0}
+    ctime0: 0
+    ctime1: 4549
+    ctime2: 7787
+    ctime3: 13955
+    ctime4: 19506
+    ctime5: 35389
+    ctime6: 45875
+    ctime7: 65535
+    atime0: 0
+    atime1: 45258
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 8
+    m_NumAlphaKeys: 3
+  duration: 0.3
+  startParticleSize: 0.2
+  startParticleSpeed: 0.3
+  startLifetime: 0.5
+  maxParticleNumber: 100
+  emissionRate: 100
+  burstParticleNumber: 25
+  effectGravity: -0.1
+  sprite: {fileID: 21300000, guid: 59ee1f87b7083a24eb30b8d2a678c23e, type: 3}
+  velocityOverLifetimeMin: {x: 0, y: 0, z: 0}
+  velocityOverLifetimeMax: {x: 0, y: 0, z: 0}
+  weaponShootEffectPrefab: {fileID: 7255582679228879866, guid: 1ced69981f2c9484aa79683862885bbe, type: 3}
