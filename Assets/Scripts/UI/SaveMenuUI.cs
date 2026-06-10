@@ -25,9 +25,15 @@ public class SaveMenuUI : MonoBehaviour
 
     void Start()
     {
-        // Only hide on start if it's in the main game scene
-        if (!isMainMenuOptions)
+        if (isMainMenuOptions)
         {
+            saveButton.gameObject.SetActive(false);
+            deleteButton.onClick.AddListener(OnDeleteClicked);
+        }
+        else
+        {
+            loadButton.gameObject.SetActive(false);
+            deleteButton.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
 
@@ -42,12 +48,6 @@ public class SaveMenuUI : MonoBehaviour
 
         saveButton.interactable = false;
         loadButton.interactable = false;
-
-        if (isMainMenuOptions)
-        {
-            deleteButton.onClick.AddListener(OnDeleteClicked);
-            deleteButton.interactable = false;
-        }
     }
 
     private void OnEnable()
