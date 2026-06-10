@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4971072735285882851
+--- !u!1 &975150209287858849
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7290855698919040643}
-  - component: {fileID: 580807986439675932}
+  - component: {fileID: 6283168659987121172}
+  - component: {fileID: 310562932208988253}
   m_Layer: 0
   m_Name: SaveManager
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7290855698919040643
+--- !u!4 &6283168659987121172
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4971072735285882851}
+  m_GameObject: {fileID: 975150209287858849}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -44.63463, y: 27.279417, z: -0.89382243}
@@ -32,13 +32,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &580807986439675932
+--- !u!114 &310562932208988253
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4971072735285882851}
+  m_GameObject: {fileID: 975150209287858849}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f4110662d500e4478b11dfec9a301db, type: 3}
@@ -107,6 +107,12 @@ MonoBehaviour:
   - {fileID: 321870976318161510, guid: 77674d43a226b8748b5915d49cbff9e0, type: 3}
   - {fileID: 321870976318161510, guid: db11a11162a502346a1d019b761817e7, type: 3}
   - {fileID: 321870976318161510, guid: fbaa6d49897288c4a8ec3797f5c2817b, type: 3}
+  - {fileID: 321870976318161510, guid: 5232f2d9ff477114f98a6cbe7a4f1f4c, type: 3}
+  - {fileID: 321870976318161510, guid: 8a070fcca164d4743b2585ec3fb80f15, type: 3}
+  - {fileID: 321870976318161510, guid: 0cb8223acc7918d4eb184f15c9894523, type: 3}
+  - {fileID: 321870976318161510, guid: ab011252cb3da8d4483f91d1beac4859, type: 3}
+  - {fileID: 321870976318161510, guid: ee659a718c567ea4d8f878c3dcd54932, type: 3}
+  - {fileID: 321870976318161510, guid: 05568fe31eb1af14ca127bc98f6f651c, type: 3}
   roomTemplates:
   - {fileID: 11400000, guid: 3d5ee3014c48c1a4a85d7f0855fb7418, type: 2}
   - {fileID: 11400000, guid: f25f1e6bdc9bcc74e9a41dff0a4659f7, type: 2}

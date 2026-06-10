@@ -279,7 +279,7 @@ public class SaveLoadManager : MonoBehaviour
             {
                 PlayerPrefabName = player.gameObject.name.Replace("(Clone)", ""),
                 position = player.transform.position,
-                saveTime = System.DateTime.Now.ToString("g"),
+                saveTime = System.DateTime.Now.ToString("T"),
                 dungeonLevelIndex = gm.currentDungeonLevelListIndex,
                 spriteName = gm.playerDetails.playerMiniMapIcon.name
             };
