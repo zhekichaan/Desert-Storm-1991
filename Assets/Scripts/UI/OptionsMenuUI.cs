@@ -1,3 +1,5 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +10,15 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] private Button audioButton;
     [SerializeField] private Button controlsButton;
 
+    #region Tooltip
+    [Tooltip("Populate with the music volume level")]
+    #endregion Tooltip
+    [SerializeField] private TextMeshProUGUI musicLevelText;
+    #region Tooltip
+    [Tooltip("Populate with the sounds volume level")]
+    #endregion Tooltip
+    [SerializeField] private TextMeshProUGUI soundsLevelText;
+    
     [Header("Menu Configuration")]
     [Tooltip("Is this options menu in the main menu scene?")]
     [SerializeField] private bool isMainMenuOptions = false;
@@ -26,6 +37,19 @@ public class OptionsMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Initialize the UI text
+    /// </summary>
+    private IEnumerator InitializeUI()
+    {
+        // Wait a frame to ensure the previous music and sound levels have been set
+        yield return null;
+
+        // Initialise UI text
+        soundsLevelText.SetText(SoundEffectManager.Instance.soundsVolume.ToString());
+        musicLevelText.SetText(MusicManager.Instance.musicVolume.ToString());
+    }
+    
     private void OnEnable()
     {
         // Only pause time if in main game scene
@@ -33,6 +57,9 @@ public class OptionsMenu : MonoBehaviour
         {
             Time.timeScale = 0f;
         }
+        
+        // Initialise UI text
+        StartCoroutine(InitializeUI());
 
         // Show audio panel by default when options menu opens
         ShowAudioPanel();
@@ -71,5 +98,41 @@ public class OptionsMenu : MonoBehaviour
             // In game, return to pause menu
             GameManager.Instance.CloseOptionsMenu();
         }
+    }
+    
+    /// <summary>
+    /// Increase music volume - linked to from music volume increase button in UI
+    /// </summary>
+    public void IncreaseMusicVolume()
+    {
+        MusicManager.Instance.IncreaseMusicVolume();
+        musicLevelText.SetText(MusicManager.Instance.musicVolume.ToString());
+    }
+
+    /// <summary>
+    /// Decrease music volume - linked to from music volume decrease button in UI
+    /// </summary>
+    public void DecreaseMusicVolume()
+    {
+        MusicManager.Instance.DecreaseMusicVolume();
+        musicLevelText.SetText(MusicManager.Instance.musicVolume.ToString());
+    }
+
+    /// <summary>
+    /// Increase sounds volume - linked to from sounds volume increase button in UI
+    /// </summary>
+    public void IncreaseSoundsVolume()
+    {
+        SoundEffectManager.Instance.IncreaseSoundsVolume();
+        soundsLevelText.SetText(SoundEffectManager.Instance.soundsVolume.ToString());
+    }
+
+    /// <summary>
+    /// Decrease sounds volume - linked to from sounds volume decrease button in UI
+    /// </summary>
+    public void DecreaseSoundsVolume()
+    {
+        SoundEffectManager.Instance.DecreaseSoundsVolume();
+        soundsLevelText.SetText(SoundEffectManager.Instance.soundsVolume.ToString());
     }
 }
