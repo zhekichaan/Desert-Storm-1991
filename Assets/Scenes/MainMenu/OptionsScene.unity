@@ -423,8 +423,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 56071807}
-        m_TargetAssemblyTypeName: AudioSettingsManager, Assembly-CSharp
+      - m_Target: {fileID: 1590274323}
+        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
         m_MethodName: IncreaseMusicVolume
         m_Mode: 1
         m_Arguments:
@@ -434,7 +434,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &44448551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,7 +484,6 @@ GameObject:
   - component: {fileID: 56071804}
   - component: {fileID: 56071806}
   - component: {fileID: 56071805}
-  - component: {fileID: 56071807}
   m_Layer: 5
   m_Name: AudioOptions
   m_TagString: Untagged
@@ -553,20 +552,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &56071807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56071803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b521eb3d16807ad498de8c560e262d1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicLevelText: {fileID: 1963740936}
-  soundsLevelText: {fileID: 1879730132}
 --- !u!1 &155721945
 GameObject:
   m_ObjectHideFlags: 0
@@ -3728,8 +3713,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 56071807}
-        m_TargetAssemblyTypeName: AudioSettingsManager, Assembly-CSharp
+      - m_Target: {fileID: 1590274323}
+        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
         m_MethodName: DecreaseSoundsVolume
         m_Mode: 1
         m_Arguments:
@@ -4821,8 +4806,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 56071807}
-        m_TargetAssemblyTypeName: AudioSettingsManager, Assembly-CSharp
+      - m_Target: {fileID: 1590274323}
+        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
         m_MethodName: DecreaseMusicVolume
         m_Mode: 1
         m_Arguments:
@@ -4954,8 +4939,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 56071807}
-        m_TargetAssemblyTypeName: AudioSettingsManager, Assembly-CSharp
+      - m_Target: {fileID: 1590274323}
+        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
         m_MethodName: IncreaseSoundsVolume
         m_Mode: 1
         m_Arguments:
@@ -6787,6 +6772,8 @@ MonoBehaviour:
   controlsPanel: {fileID: 1168280068}
   audioButton: {fileID: 1484825135}
   controlsButton: {fileID: 878526339}
+  musicLevelText: {fileID: 1963740936}
+  soundsLevelText: {fileID: 1879730132}
   isMainMenuOptions: 1
 --- !u!114 &1590274324
 MonoBehaviour:

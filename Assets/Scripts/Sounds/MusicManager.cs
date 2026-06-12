@@ -38,9 +38,7 @@ public class MusicManager : SingletonMonobehaviour<MusicManager>
         // Save volume settings in playerprefs
         PlayerPrefs.SetInt("musicVolume", musicVolume);
     }
-
-
-
+    
     public void PlayMusic(MusicTrackSO musicTrack, float fadeOutTime = Settings.musicFadeOutTime, float fadeInTime = Settings.musicFadeInTime)
     {
         // Play music track
