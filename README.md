@@ -36,5 +36,3 @@ A 2D top-down tactical action game built in Unity. Navigate urban landscapes and
 - Layers. Edit layers -> select TagManager
 
 # Build
-Download the latest build here: https://github.com/AnthonyK27/Desert-Storm-1991/releases/tag/Build
-Extract files and run DesertStorm1991.exe
