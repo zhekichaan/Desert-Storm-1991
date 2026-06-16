@@ -4,40 +4,88 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 #endif
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Player))]
 [DisallowMultipleComponent]
-public class PlayerControl : MonoBehaviour 
+public class PlayerControl : MonoBehaviour
 {
     #region Tooltip
-
     [Tooltip("MovementDetailsSO scriptable object containing movement details such as speed")]
-
     #endregion Tooltip
-
     [SerializeField] private MovementDetailsSO movementDetails;
 
-    private bool leftMouseDownPreviousFrame = false;
     private Player player;
     private int currentWeaponIndex = 1;
     private float moveSpeed;
     private bool firePreviousFrame = false;
     private bool isPlayerMovementDisabled = false;
+    
+    private InputSystem_Actions inputActions;
+    private Vector2 moveInput;
 
     private void Awake()
     {
-        // Load components
         player = GetComponent<Player>();
-
         moveSpeed = movementDetails.GetMoveSpeed();
+
+        inputActions = new InputSystem_Actions();
+        
+        string json = PlayerPrefs.GetString("rebinds", string.Empty);
+        if (!string.IsNullOrEmpty(json))
+            inputActions.asset.LoadBindingOverridesFromJson(json);
+    
+        inputActions.Enable();
+    }
+
+    private void OnEnable()
+    {
+        inputActions.Player.Enable();
+
+        inputActions.Player.Move.performed += OnMovePerformed;
+        inputActions.Player.Move.canceled += OnMoveCanceled;
+
+        inputActions.Player.Shoot.performed += OnShootPerformed;
+        inputActions.Player.Shoot.canceled += OnShootCanceled;
+
+        inputActions.Player.Interact.performed += OnInteractPerformed;
+
+        inputActions.Player.PreviousWeapon.performed += OnPreviousWeaponPerformed;
+        inputActions.Player.NextWeapon.performed += OnNextWeaponPerformed;
+
+        // Reload - bind R in the asset to a "Reload" action, or reuse an existing one
+        inputActions.Player.Reload.performed += OnReloadPerformed;
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Player.Move.performed -= OnMovePerformed;
+        inputActions.Player.Move.canceled -= OnMoveCanceled;
+
+        inputActions.Player.Shoot.performed -= OnShootPerformed;
+        inputActions.Player.Shoot.canceled -= OnShootCanceled;
+
+        inputActions.Player.Interact.performed -= OnInteractPerformed;
+
+        inputActions.Player.PreviousWeapon.performed -= OnPreviousWeaponPerformed;
+        inputActions.Player.NextWeapon.performed -= OnNextWeaponPerformed;
+
+        inputActions.Player.Reload.performed -= OnReloadPerformed;
+
+        inputActions.Player.Disable();
     }
 
     private void Start()
     {
-        // Set player animation speed
         SetPlayerAnimationSpeed();
     }
 
+    public void ReloadBindings(string json)
+    {
+        if (!string.IsNullOrEmpty(json))
+            inputActions.asset.LoadBindingOverridesFromJson(json);
+    }
+    
     /// <summary>
     /// Set the player starting weapon
     /// </summary>
@@ -56,49 +104,40 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-
-
-    /// <summary>
-    /// Set player animator speed to match movement speed
-    /// </summary>
     private void SetPlayerAnimationSpeed()
     {
-        // Set animator speed to match movement speed
         player.animator.speed = moveSpeed / Settings.baseSpeedForPlayerAnimations;
     }
 
     private void Update()
     {
-        // if player movement disabled then return
         if (isPlayerMovementDisabled)
             return;
 
-        // Process the player movement input
         MovementInput();
-
-        // Process the player weapon input
-        WeaponInput();
-
-        // Process player use item input
-        UseItemInput();
+        AimWeaponAndFire();
     }
 
-    /// <summary>
-    /// Player movement input
-    /// </summary>
+    #region Movement
+
+    private void OnMovePerformed(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+    }
+
+    private void OnMoveCanceled(InputAction.CallbackContext context)
+    {
+        moveInput = Vector2.zero;
+    }
+
     private void MovementInput()
     {
         if (Time.timeScale == 0f) return;
-        
-        // Get movement input
-        float horizontalMovement = Input.GetAxisRaw("Horizontal");
-        float verticalMovement = Input.GetAxisRaw("Vertical");
 
-        // Create a direction vector based on the input
-        Vector2 direction = new Vector2(horizontalMovement, verticalMovement);
+        Vector2 direction = moveInput;
 
         // Adjust distance for diagonal movement (pythagoras approximation)
-        if (horizontalMovement != 0f && verticalMovement != 0f)
+        if (direction.x != 0f && direction.y != 0f)
         {
             direction *= 0.7f;
         }
@@ -116,68 +155,61 @@ public class PlayerControl : MonoBehaviour
                 Debug.LogError("movementByVelocityEvent is NULL");
                 return;
             }
-            // trigger movement event
+
             player.movementByVelocityEvent.CallMovementByVelocityEvent(direction, moveSpeed);
         }
-        // else trigger idle event
         else
         {
             player.idleEvent.CallIdleEvent();
         }
-
     }
 
-    /// <summary>
-    /// Weapon Input
-    /// </summary>
-    private void WeaponInput()
+    #endregion Movement
+
+    #region Aim & Fire
+
+    private bool isFiring = false;
+
+    private void OnShootPerformed(InputAction.CallbackContext context)
+    {
+        isFiring = true;
+    }
+
+    private void OnShootCanceled(InputAction.CallbackContext context)
+    {
+        isFiring = false;
+    }
+
+    private void AimWeaponAndFire()
     {
         if (Time.timeScale == 0f) return;
-        
+
         Vector3 weaponDirection;
         float weaponAngleDegrees, playerAngleDegrees;
         AimDirection playerAimDirection;
 
-        // Aim weapon input
         AimWeaponInput(out weaponDirection, out weaponAngleDegrees, out playerAngleDegrees, out playerAimDirection);
-
-        // Fire weapon input
         FireWeaponInput(weaponDirection, weaponAngleDegrees, playerAngleDegrees, playerAimDirection);
-
-        // Switch weapon input
-        SwitchWeaponInput();
-
-        // Reload weapon input
-        ReloadWeaponInput();
     }
 
     private void AimWeaponInput(out Vector3 weaponDirection, out float weaponAngleDegrees, out float playerAngleDegrees, out AimDirection playerAimDirection)
     {
-        // Get mouse world position
         Vector3 mouseWorldPosition = HelperUtilities.GetMouseWorldPosition();
 
-        // Calculate direction vector of mouse cursor from weapon shoot position
         weaponDirection = (mouseWorldPosition - player.activeWeapon.GetShootPosition());
-
-        // Calculate direction vector of mouse cursor from player transform position
         Vector3 playerDirection = (mouseWorldPosition - transform.position);
 
-        // Get weapon to cursor angle
         weaponAngleDegrees = HelperUtilities.GetAngleFromVector(weaponDirection);
-
-        // Get player to cursor angle
         playerAngleDegrees = HelperUtilities.GetAngleFromVector(playerDirection);
 
-        // Set player aim direction
         playerAimDirection = HelperUtilities.GetAimDirection(playerAngleDegrees);
 
-        // Trigger weapon aim event
         player.aimWeaponEvent.CallAimWeaponEvent(playerAimDirection, playerAngleDegrees, weaponAngleDegrees, weaponDirection);
     }
 
     private void FireWeaponInput(Vector3 weaponDirection, float weaponAngleDegrees, float playerAngleDegrees, AimDirection playerAimDirection)
     {
-        if (Input.GetMouseButton(0))
+        if (isFiring)
         {
             player.fireWeaponEvent.CallFireWeaponEvent(true, firePreviousFrame, playerAimDirection, playerAngleDegrees, weaponAngleDegrees, weaponDirection);
             firePreviousFrame = true;
@@ -188,74 +220,18 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    private void SwitchWeaponInput()
+    #endregion Aim & Fire
+
+    #region Weapon Switching
+
+    private void OnPreviousWeaponPerformed(InputAction.CallbackContext context)
     {
-        // Switch weapon if mouse scroll wheel selecetd
-        if (Input.mouseScrollDelta.y < 0f)
-        {
-            PreviousWeapon();
-        }
+        PreviousWeapon();
+    }
 
-        if (Input.mouseScrollDelta.y > 0f)
-        {
-            NextWeapon();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SetWeaponByIndex(1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SetWeaponByIndex(2);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SetWeaponByIndex(3);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            SetWeaponByIndex(4);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            SetWeaponByIndex(5);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            SetWeaponByIndex(6);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            SetWeaponByIndex(7);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            SetWeaponByIndex(8);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            SetWeaponByIndex(9);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            SetWeaponByIndex(10);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Minus))
-        {
-            SetCurrentWeaponToFirstInTheList();
-        }
-
+    private void OnNextWeaponPerformed(InputAction.CallbackContext context)
+    {
+        NextWeapon();
     }
 
     private void SetWeaponByIndex(int weaponIndex, bool playSound = true)
@@ -269,6 +245,7 @@ public class PlayerControl : MonoBehaviour
                 SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.weaponSwitch);
         }
     }
+
     private void NextWeapon()
     {
         currentWeaponIndex++;
@@ -279,7 +256,6 @@ public class PlayerControl : MonoBehaviour
         }
 
         SetWeaponByIndex(currentWeaponIndex);
-
     }
 
     private void PreviousWeapon()
@@ -294,53 +270,73 @@ public class PlayerControl : MonoBehaviour
         SetWeaponByIndex(currentWeaponIndex);
     }
 
-    private void ReloadWeaponInput()
+    /// <summary>
+    /// Set the current weapon to be first in the player weapon list
+    /// </summary>
+    private void SetCurrentWeaponToFirstInTheList()
+    {
+        List<Weapon> tempWeaponList = new List<Weapon>();
+
+        Weapon currentWeapon = player.weaponList[currentWeaponIndex - 1];
+        currentWeapon.weaponListPosition = 1;
+        tempWeaponList.Add(currentWeapon);
+
+        int index = 2;
+
+        foreach (Weapon weapon in player.weaponList)
+        {
+            if (weapon == currentWeapon) continue;
+
+            tempWeaponList.Add(weapon);
+            weapon.weaponListPosition = index;
+            index++;
+        }
+
+        player.weaponList = tempWeaponList;
+        currentWeaponIndex = 1;
+
+        SetWeaponByIndex(currentWeaponIndex);
+    }
+
+    #endregion Weapon Switching
+
+    #region Reload
+
+    private void OnReloadPerformed(InputAction.CallbackContext context)
     {
         Weapon currentWeapon = player.activeWeapon.GetCurrentWeapon();
 
-        // if current weapon is reloading return
         if (currentWeapon.isWeaponReloading) return;
 
-        // remaining ammo is less than clip capacity then return and not infinite ammo then return
         if (currentWeapon.weaponRemainingAmmo < currentWeapon.weaponDetails.weaponClipAmmoCapacity && !currentWeapon.weaponDetails.hasInfiniteAmmo) return;
 
-        // if ammo in clip equals clip capacity then return
         if (currentWeapon.weaponClipRemainingAmmo == currentWeapon.weaponDetails.weaponClipAmmoCapacity) return;
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            // Call the reload weapon event
-            player.reloadWeaponEvent.CallReloadWeaponEvent(player.activeWeapon.GetCurrentWeapon(), 0);
-        }
-
+        player.reloadWeaponEvent.CallReloadWeaponEvent(player.activeWeapon.GetCurrentWeapon(), 0);
     }
 
-    /// <summary>
-    /// Use the nearest item within 2 unity units from the player
-    /// </summary>
-    private void UseItemInput()
+    #endregion Reload
+
+    #region Interact
+
+    private void OnInteractPerformed(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        float useItemRadius = 2f;
+
+        Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(player.GetPlayerPosition(), useItemRadius);
+
+        foreach (Collider2D collider2D in collider2DArray)
         {
-            float useItemRadius = 2f;
+            IUseable iUseable = collider2D.GetComponent<IUseable>();
 
-            // Get any 'Useable' item near the player
-            Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(player.GetPlayerPosition(), useItemRadius);
-
-            // Loop through detected items to see if any are 'useable'
-            foreach (Collider2D collider2D in collider2DArray)
+            if (iUseable != null)
             {
-                IUseable iUseable = collider2D.GetComponent<IUseable>();
-
-                if (iUseable != null)
-                {
-                    iUseable.UseItem();
-                }
+                iUseable.UseItem();
             }
         }
     }
 
-
+    #endregion Interact
 
     /// <summary>
     /// Enable the player movement
@@ -358,42 +354,6 @@ public class PlayerControl : MonoBehaviour
         isPlayerMovementDisabled = true;
         player.idleEvent.CallIdleEvent();
     }
-
-    /// <summary>
-    /// Set the current weapon to be first in the player weapon list
-    /// </summary>
-    private void SetCurrentWeaponToFirstInTheList()
-    {
-        // Create new temporary list
-        List<Weapon> tempWeaponList = new List<Weapon>();
-
-        // Add the current weapon to first in the temp list
-        Weapon currentWeapon = player.weaponList[currentWeaponIndex - 1];
-        currentWeapon.weaponListPosition = 1;
-        tempWeaponList.Add(currentWeapon);
-
-        // Loop through existing weapon list and add - skipping current weapon
-        int index = 2;
-
-        foreach (Weapon weapon in player.weaponList)
-        {
-            if (weapon == currentWeapon) continue;
-
-            tempWeaponList.Add(weapon);
-            weapon.weaponListPosition = index;
-            index++;
-        }
-
-        // Assign new list
-        player.weaponList = tempWeaponList;
-
-        currentWeaponIndex = 1;
-
-        // Set current weapon
-        SetWeaponByIndex(currentWeaponIndex);
-    }
-
-
 
     #region Validation
 

@@ -86,7 +86,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         {
             gameState = GameState.playingLevel;
         }
-
     }
 
     /// <summary>
