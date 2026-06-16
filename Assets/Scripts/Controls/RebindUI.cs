@@ -14,6 +14,10 @@ public class RebindUI : MonoBehaviour
 
     private void OnEnable()
     {
+        string json = PlayerPrefs.GetString("rebinds", string.Empty);
+        if (!string.IsNullOrEmpty(json))
+            inputAction.action.actionMap.asset.LoadBindingOverridesFromJson(json);
+
         UpdateBindingDisplay();
         rebindButton.onClick.AddListener(StartRebind);
     }
@@ -35,20 +39,20 @@ public class RebindUI : MonoBehaviour
         bindingText.text = "...";
 
         rebindOperation = inputAction.action.PerformInteractiveRebinding(bindingIndex)
-            .WithExpectedControlType("Button")
             .WithControlsExcluding("Mouse/position")
             .WithCancelingThrough("<Keyboard>/escape")
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation =>
             {
+                ClearConflictingBindings();
+                
                 UpdateBindingDisplay();
                 operation.Dispose();
                 inputAction.action.Enable();
                 SaveRebinds();
                 
-                // Reload onto the gameplay instance
                 string json = PlayerPrefs.GetString("rebinds", string.Empty);
-                GameManager.Instance.GetPlayer().playerControl.ReloadBindings(json);
+                GameManager.Instance?.GetPlayer().playerControl.ReloadBindings(json);
             })
             .OnCancel(operation =>
             {
@@ -59,6 +63,41 @@ public class RebindUI : MonoBehaviour
             .Start();
     }
 
+    private void ClearConflictingBindings()
+    {
+        string newPath = inputAction.action.bindings[bindingIndex].effectivePath;
+
+        foreach (var action in inputAction.action.actionMap.actions)
+        {
+            for (int i = 0; i < action.bindings.Count; i++)
+            {                
+                if (action == inputAction.action && i == bindingIndex) continue;
+                
+                if (action.bindings[i].isComposite) continue;
+                
+                if (action.bindings[i].effectivePath == newPath)
+                {
+                    action.ApplyBindingOverride(i, string.Empty);
+                    RefreshAllRebindUIs();
+                    return;
+                }
+            }
+        }
+    }
+
+    private void RefreshAllRebindUIs()
+    {
+        foreach (var rebindUI in FindObjectsOfType<RebindUI>())
+        {
+            rebindUI.RefreshDisplay();
+        }
+    }
+
+    public void RefreshDisplay()
+    {
+        UpdateBindingDisplay();
+    }
+    
     private void SaveRebinds()
     {
         var asset = inputAction.action.actionMap.asset;
