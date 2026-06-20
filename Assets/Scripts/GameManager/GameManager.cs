@@ -69,7 +69,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private int scoreMultiplier;
     private InstantiatedRoom bossRoom;
 
-    private bool isFading = false;
+    private bool isFading;
+    private bool isDisplayingMessage = false;
 
     protected override void Awake()
     {
@@ -248,15 +249,18 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
-                    overviewMenu.SetActive(true);
-                    DisplayDungeonOverviewMap();
+                    if (!isFading && !isDisplayingMessage)
+                    {
+                        overviewMenu.SetActive(true);
+                        DisplayDungeonOverviewMap();
+                    }
                 }
 
                 break;
 
             // if in the dungeon overview map handle the release of the tab key to clear the map
             case GameState.dungeonOverviewMap:
-
+            
                 // Key released
                 if (Input.GetKeyUp(KeyCode.Tab))
                 {
@@ -264,7 +268,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
                     // Clear dungeonOverviewMap
                     DungeonMap.Instance.ClearDungeonOverViewMap();
                 }
-
+            
                 break;
 
             // handle the level being completed
@@ -414,10 +418,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     /// </summary>
     private void DisplayDungeonOverviewMap()
     {
-        // return if fading
-        if (isFading)
-            return;
-
         // Display dungeonOverviewMap
         DungeonMap.Instance.DisplayDungeonOverViewMap();
     }
@@ -556,9 +556,13 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
         GetPlayer().playerControl.DisablePlayer();
 
+        isDisplayingMessage = true;
+
         string messageText = "LEVEL " + (currentDungeonLevelListIndex + 1).ToString() + "\n\n" + dungeonLevelList[currentDungeonLevelListIndex].levelName.ToUpper();
 
         yield return StartCoroutine(DisplayMessageRoutine(messageText, Color.white, 2f));
+        
+        isDisplayingMessage = false;
 
         GetPlayer().playerControl.EnablePlayer();
 
