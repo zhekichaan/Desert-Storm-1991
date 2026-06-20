@@ -53,7 +53,6 @@ public class PlayerControl : MonoBehaviour
         inputActions.Player.PreviousWeapon.performed += OnPreviousWeaponPerformed;
         inputActions.Player.NextWeapon.performed += OnNextWeaponPerformed;
 
-        // Reload - bind R in the asset to a "Reload" action, or reuse an existing one
         inputActions.Player.Reload.performed += OnReloadPerformed;
     }
 
