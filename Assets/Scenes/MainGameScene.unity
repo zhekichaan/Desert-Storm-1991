@@ -1208,7 +1208,7 @@ GameObject:
   - component: {fileID: 112070053}
   - component: {fileID: 112070052}
   m_Layer: 5
-  m_Name: Tab_Objectives
+  m_Name: Tab_Objective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3675,7 +3675,7 @@ GameObject:
   - component: {fileID: 349436068}
   - component: {fileID: 349436067}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ObjectiveTabLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3720,7 +3720,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Objectives
+  m_text: 'Objective
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 77a3bd9f9c1084a1e95a02eaca85aaa3, type: 2}
   m_sharedMaterial: {fileID: -871023867978780415, guid: 77a3bd9f9c1084a1e95a02eaca85aaa3, type: 2}
@@ -7066,7 +7068,7 @@ GameObject:
   m_Component:
   - component: {fileID: 659854022}
   m_Layer: 5
-  m_Name: Objectives
+  m_Name: Objective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13510,7 +13512,7 @@ GameObject:
   - component: {fileID: 1257460122}
   - component: {fileID: 1257460121}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: InventoryTabLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18290,7 +18292,7 @@ GameObject:
   - component: {fileID: 1730613126}
   - component: {fileID: 1730613125}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MapTabLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18989,7 +18991,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.0625
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
