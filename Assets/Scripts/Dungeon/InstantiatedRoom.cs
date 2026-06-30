@@ -14,6 +14,7 @@ public class InstantiatedRoom : MonoBehaviour
     [HideInInspector] public Tilemap decoration2Tilemap;
     [HideInInspector] public Tilemap frontTilemap;
     [HideInInspector] public Tilemap collisionTilemap;
+    [HideInInspector] public Tilemap actorCollisionTilemap; // collision for actors only (ignore projectiles)
     [HideInInspector] public Tilemap minimapTilemap;
     [HideInInspector] public int[,] aStarMovementPenalty;  // use this 2d array to store movement penalties from the tilemaps to be used in AStar pathfinding
     [HideInInspector] public int[,] aStarItemObstacles; // use to store position of moveable items that are obstacles
@@ -121,6 +122,10 @@ public class InstantiatedRoom : MonoBehaviour
             {
                 collisionTilemap = tilemap;
             }
+            else if (tilemap.gameObject.tag == "actorCollisionTilemap")
+            {
+                actorCollisionTilemap = tilemap;
+            }
             else if (tilemap.gameObject.tag == "minimapTilemap")
             {
                 minimapTilemap = tilemap;
@@ -145,6 +150,10 @@ public class InstantiatedRoom : MonoBehaviour
             if (collisionTilemap != null)
             {
                 BlockADoorwayOnTilemapLayer(collisionTilemap, doorway);
+            }
+            if (actorCollisionTilemap != null)
+            {
+                BlockADoorwayOnTilemapLayer(actorCollisionTilemap, doorway);
             }
 
             if (minimapTilemap != null)
@@ -267,10 +276,12 @@ public class InstantiatedRoom : MonoBehaviour
 
                 // Add obstacles for collision tiles the enemy can't walk on
                 TileBase tile = collisionTilemap.GetTile(new Vector3Int(x + room.templateLowerBounds.x, y + room.templateLowerBounds.y, 0));
+                // For pits and other obstacles that can't be walked on but do not stop projectiles
+                TileBase actorTile = actorCollisionTilemap.GetTile(new Vector3Int(x + room.templateLowerBounds.x, y + room.templateLowerBounds.y, 0));
 
                 foreach (TileBase collisionTile in GameResources.Instance.enemyUnwalkableCollisionTilesArray)
                 {
-                    if (tile == collisionTile)
+                    if (tile == collisionTile || actorTile == collisionTile)
                     {
                         aStarMovementPenalty[x, y] = 0;
                         break;
@@ -362,7 +373,13 @@ public class InstantiatedRoom : MonoBehaviour
     public void DisableCollisionTilemapRenderer()
     {
         // Disable collision tilemap renderer
-        collisionTilemap.gameObject.GetComponent<TilemapRenderer>().enabled = false;
+        // Added safety as some old prefabs may be missing the new secondary collision layer
+        if (collisionTilemap != null)
+            collisionTilemap.GetComponent<TilemapRenderer>().enabled = false;
+
+        if (actorCollisionTilemap != null)
+            actorCollisionTilemap.GetComponent<TilemapRenderer>().enabled = false;
+
 
     }
 
