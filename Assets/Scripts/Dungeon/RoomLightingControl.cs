@@ -25,7 +25,10 @@ public class RoomLightingControl : MonoBehaviour
         instantiatedRoom.groundTilemap.GetComponent<TilemapRenderer>().material = runtimeDarkMaterial;
         instantiatedRoom.decoration1Tilemap.GetComponent<TilemapRenderer>().material = runtimeDarkMaterial;
         instantiatedRoom.decoration2Tilemap.GetComponent<TilemapRenderer>().material = runtimeDarkMaterial;
-        instantiatedRoom.frontTilemap.GetComponent<TilemapRenderer>().material = runtimeDarkMaterial;
+        foreach (Tilemap tilemap in instantiatedRoom.frontTilemapList)
+        {
+            tilemap.GetComponent<TilemapRenderer>().material = runtimeDarkMaterial;
+        }
         instantiatedRoom.minimapTilemap.GetComponent<TilemapRenderer>().material = runtimeDarkMaterial;
     }
 
@@ -80,7 +83,10 @@ public class RoomLightingControl : MonoBehaviour
         instantiatedRoom.groundTilemap.GetComponent<TilemapRenderer>().material = material;
         instantiatedRoom.decoration1Tilemap.GetComponent<TilemapRenderer>().material = material;
         instantiatedRoom.decoration2Tilemap.GetComponent<TilemapRenderer>().material = material;
-        instantiatedRoom.frontTilemap.GetComponent<TilemapRenderer>().material = material;
+        foreach (Tilemap tilemap in instantiatedRoom.frontTilemapList)
+        {
+            tilemap.GetComponent<TilemapRenderer>().material = material;
+        }
         instantiatedRoom.minimapTilemap.GetComponent<TilemapRenderer>().material = material;
 
         for (float i = 0.05f; i <= 1f; i += Time.deltaTime / Settings.fadeInTime)
@@ -93,7 +99,10 @@ public class RoomLightingControl : MonoBehaviour
         instantiatedRoom.groundTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.litMaterial;
         instantiatedRoom.decoration1Tilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.litMaterial;
         instantiatedRoom.decoration2Tilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.litMaterial;
-        instantiatedRoom.frontTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.litMaterial;
+        foreach (Tilemap tilemap in instantiatedRoom.frontTilemapList)
+        {
+            tilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.litMaterial;
+        }
         instantiatedRoom.minimapTilemap.GetComponent<TilemapRenderer>().material = GameResources.Instance.litMaterial;
 
 

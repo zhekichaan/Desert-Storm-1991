@@ -12,7 +12,8 @@ public class InstantiatedRoom : MonoBehaviour
     [HideInInspector] public Tilemap groundTilemap;
     [HideInInspector] public Tilemap decoration1Tilemap;
     [HideInInspector] public Tilemap decoration2Tilemap;
-    [HideInInspector] public Tilemap frontTilemap;
+    //[HideInInspector] public Tilemap frontTilemap;
+    public List<Tilemap> frontTilemapList = new List<Tilemap>(); // to support additional foreground layers
     [HideInInspector] public Tilemap collisionTilemap;
     [HideInInspector] public Tilemap actorCollisionTilemap; // collision for actors only (ignore projectiles)
     [HideInInspector] public Tilemap minimapTilemap;
@@ -116,7 +117,7 @@ public class InstantiatedRoom : MonoBehaviour
             }
             else if (tilemap.gameObject.tag == "frontTilemap")
             {
-                frontTilemap = tilemap;
+                frontTilemapList.Add(tilemap);
             }
             else if (tilemap.gameObject.tag == "collisionTilemap")
             {
@@ -176,9 +177,13 @@ public class InstantiatedRoom : MonoBehaviour
                 BlockADoorwayOnTilemapLayer(decoration2Tilemap, doorway);
             }
 
-            if (frontTilemap != null)
+            // FrontTilemap contains one or more tilemaps with this tag
+            foreach (Tilemap frontTilemap in frontTilemapList)
             {
-                BlockADoorwayOnTilemapLayer(frontTilemap, doorway);
+                if (frontTilemap != null)
+                {
+                    BlockADoorwayOnTilemapLayer(frontTilemap, doorway);
+                }
             }
         }
     }
