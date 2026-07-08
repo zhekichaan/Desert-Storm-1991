@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyName: Vlad
   enemyPrefab: {fileID: 6171120314582608156, guid: c23b1562f5c027849a30bba311da0f82, type: 3}
   chaseDistance: 50
+  isBoss: 0
   enemyStandardMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   enemyMaterializeTime: 2
   enemyMaterializeShader: {fileID: -6465566751694194690, guid: 25d60a592a9798f41b091cd1a763e59e, type: 3}
@@ -37,3 +38,4 @@ MonoBehaviour:
   isImmuneAfterHit: 0
   hitImmunityTime: 0
   isHealthBarDisplayed: 1
+  bountyDetails: {fileID: 11400000, guid: c6b6200954ab3478a8a73c402fa7a6a0, type: 2}
