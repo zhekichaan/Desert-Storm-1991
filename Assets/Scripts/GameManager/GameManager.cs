@@ -68,6 +68,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private long gameScore;
     private int scoreMultiplier;
     private InstantiatedRoom bossRoom;
+    private EnemyDetailsSO bossEnemyDetails;
 
     private bool isFading;
     private bool isDisplayingMessage = false;
@@ -372,11 +373,11 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         // Loop through all dungeon rooms to see if cleared of enemies
         foreach (KeyValuePair<string, Room> keyValuePair in DungeonBuilder.Instance.dungeonBuilderRoomDictionary)
         {
-            Debug.Log(keyValuePair.Value.isClearedOfEnemies);
             // skip boss room for time being
             if (keyValuePair.Value.roomNodeType.isBossRoom)
             {
                 bossRoom = keyValuePair.Value.instantiatedRoom;
+                bossEnemyDetails = GetBossEnemyDetails(bossRoom);
                 continue;
             }
 
@@ -384,7 +385,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>
             if (!keyValuePair.Value.isClearedOfEnemies)
             {
                 isDungeonClearOfRegularEnemies = false;
-                break;
             }
         }
 
@@ -694,6 +694,34 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     }
 
+    /// <summary>
+    /// Get the boss enemy details for the boss room, matched to the current dungeon level.
+    /// Returns null if none found (caller should handle this).
+    /// </summary>
+    private EnemyDetailsSO GetBossEnemyDetails(InstantiatedRoom bossRoom)
+    {
+        DungeonLevelSO currentLevel = dungeonLevelList[currentDungeonLevelListIndex];
+
+        foreach (SpawnableObjectsByLevel<EnemyDetailsSO> enemiesByLevel in bossRoom.room.enemiesByLevelList)
+        {
+            if (enemiesByLevel.dungeonLevel != currentLevel) continue;
+
+            if (enemiesByLevel.spawnableObjectRatioList == null ||
+                enemiesByLevel.spawnableObjectRatioList.Count == 0)
+            {
+                Debug.LogWarning("No boss enemy configured for level " + currentLevel.levelName);
+                return null;
+            }
+
+            Debug.Log(enemiesByLevel.spawnableObjectRatioList.Count);
+            Debug.Log(enemiesByLevel.spawnableObjectRatioList[0].dungeonObject);
+            
+            return enemiesByLevel.spawnableObjectRatioList[0].dungeonObject;
+        }
+
+        Debug.LogWarning("No enemiesByLevelList entry found for level " + currentLevel.levelName + " in boss room");
+        return null;
+    }
 
     /// <summary>
     /// Game Won
@@ -846,7 +874,15 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         return dungeonLevelList[currentDungeonLevelListIndex];
     }
-
+    
+    /// <summary>
+    /// Get the details of the current level's boss enemy
+    /// </summary>
+    public EnemyDetailsSO GetBossEnemyDetails()
+    {
+        return bossEnemyDetails;
+    }
+    
     #region Validation
 
 #if UNITY_EDITOR

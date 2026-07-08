@@ -22,6 +22,11 @@ public class EnemyDetailsSO : ScriptableObject
     [Tooltip("Distance to the player before enemy starts chasing")]
     #endregion
     public float chaseDistance = 50f;
+    
+    #region Tooltip
+    [Tooltip("Check this if this enemy can be used as a dungeon boss - enables validation of the objective UI fields below")]
+    #endregion
+    public bool isBoss = false;
 
     #region Header ENEMY MATERIAL
     [Space(10)]
@@ -102,6 +107,15 @@ public class EnemyDetailsSO : ScriptableObject
     #endregion
     public bool isHealthBarDisplayed = false;
 
+    #region Header BOUNTY (only used if this enemy is shown as a boss objective)
+    [Space(10)]
+    [Header("BOUNTY")]
+    #endregion
+    #region Tooltip
+    [Tooltip("Bounty card details - leave empty if this enemy is never shown as an objective/boss")]
+    #endregion
+    public BountyDetailsSO bountyDetails;
+    
     #region Validation
 #if UNITY_EDITOR
     // Validate the scriptable object details entered
