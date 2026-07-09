@@ -62,15 +62,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
       propertyPath: numberOfItemsToSpawnMin
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
       propertyPath: weaponSpawnByLevelList.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
+      propertyPath: ammoSpawnByLevelList.Array.data[0].max
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
+      propertyPath: ammoSpawnByLevelList.Array.data[0].min
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
+      propertyPath: ammoSpawnByLevelList.Array.data[1].max
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
+      propertyPath: ammoSpawnByLevelList.Array.data[1].min
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
       propertyPath: chestSpawnChanceByLevelList.Array.size
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
+      propertyPath: healthSpawnByLevelList.Array.data[0].max
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
+      propertyPath: healthSpawnByLevelList.Array.data[0].min
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
       propertyPath: healthSpawnByLevelList.Array.data[1].max
@@ -90,16 +114,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
       propertyPath: chestSpawnChanceByLevelList.Array.data[1].max
-      value: 35
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
       propertyPath: chestSpawnChanceByLevelList.Array.data[1].min
-      value: 20
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
+      propertyPath: chestSpawnChanceByLevelList.Array.data[2].min
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
       propertyPath: weaponSpawnByLevelList.Array.data[0].dungeonLevel
       value: 
       objectReference: {fileID: 11400000, guid: 7ea5707d1fb74ad4b98c6087b4ee85c7, type: 2}
+    - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
+      propertyPath: chestSpawnChanceByLevelList.Array.data[2].dungeonLevel
+      value: 
+      objectReference: {fileID: 11400000, guid: d4bce04898117374594fcf1a5c3b11aa, type: 2}
     - target: {fileID: 2559219369420540576, guid: 577386cd043048947a8d242d0622203e, type: 3}
       propertyPath: weaponSpawnByLevelList.Array.data[0].spawnableObjectRatioList.Array.size
       value: 0
