@@ -61850,11 +61850,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1244549559356352314, guid: ddbfab02200b4b3468e86559441118df, type: 3}
       propertyPath: chestSpawnChanceMax
-      value: 71
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1244549559356352314, guid: ddbfab02200b4b3468e86559441118df, type: 3}
       propertyPath: chestSpawnChanceMin
-      value: 60
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1244549559356352314, guid: ddbfab02200b4b3468e86559441118df, type: 3}
       propertyPath: chestSpawnChanceByLevelList.Array.data[0].min
