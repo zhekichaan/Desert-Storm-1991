@@ -16650,6 +16650,14 @@ PrefabInstance:
       propertyPath: chestSpawnPosition
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 526092448612214869, guid: 89bc22b852441a6459ed3de7f558d60b, type: 3}
+      propertyPath: chestSpawnChanceMax
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 526092448612214869, guid: 89bc22b852441a6459ed3de7f558d60b, type: 3}
+      propertyPath: chestSpawnChanceMin
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3574630938097915879, guid: 89bc22b852441a6459ed3de7f558d60b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
