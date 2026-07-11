@@ -24,12 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2748550542507935429}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1140350469370587940
 MonoBehaviour:
@@ -48,6 +49,7 @@ MonoBehaviour:
   playerDetailsList:
   - {fileID: 11400000, guid: 753d242376275e04eb835c95d6e2a672, type: 2}
   - {fileID: 11400000, guid: cf421f867183ce54b90fa5c9dba0f7cd, type: 2}
+  - {fileID: 11400000, guid: a0b3f54649d864b26a093407f3f7cd12, type: 2}
   currentPlayer: {fileID: 11400000, guid: e6cca0f59a3d964498af76d8b07ec047, type: 2}
   musicMasterMixerGroup: {fileID: -7206380732494497733, guid: f7d4c21fe8023db479060fd88bd74b5c, type: 2}
   mainMenuMusic: {fileID: 11400000, guid: 9126b40f422dc294fba430148bd9b321, type: 2}
