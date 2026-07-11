@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -18,6 +18,8 @@ public class InventoryUI : MonoBehaviour
         slots.Clear();
 
         List<Weapon> weapons = GameManager.Instance.GetPlayer().weaponList;
+
+        int currentWeaponIndex = GameManager.Instance.GetPlayer().playerControl.GetCurrentWeaponIndex();
 
         for (int i = 0; i < weapons.Count; i++)
         {
@@ -37,20 +39,49 @@ public class InventoryUI : MonoBehaviour
 
         // auto-select first slot
         if (slots.Count > 0)
-            SelectSlot(0);
+            SelectSlot(currentWeaponIndex);
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+        {
+            if (selectedIndex >= 0 && selectedIndex < slots.Count)
+                slots[selectedIndex].Select(false);
+            
+            selectedIndex = GameManager.Instance.GetPlayer().playerControl.PreviousWeapon();
+            
+            slots[selectedIndex].Select(true);
+
+            var weapon = GameManager.Instance.GetPlayer().weaponList[selectedIndex];
+            detailPanel.Show(weapon);
+        }
+
+        if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+        {
+            if (selectedIndex >= 0 && selectedIndex < slots.Count)
+                slots[selectedIndex].Select(false);
+            
+            selectedIndex = GameManager.Instance.GetPlayer().playerControl.NextWeapon();
+            
+            slots[selectedIndex].Select(true);
+
+            var weapon = GameManager.Instance.GetPlayer().weaponList[selectedIndex];
+            detailPanel.Show(weapon);
+        }
     }
 
     private void SelectSlot(int index)
     {
-        // deselect previous
         if (selectedIndex >= 0 && selectedIndex < slots.Count)
             slots[selectedIndex].Select(false);
 
         selectedIndex = index;
         slots[selectedIndex].Select(true);
 
-        // update detail panel
         var weapon = GameManager.Instance.GetPlayer().weaponList[index];
         detailPanel.Show(weapon);
+        
+        GameManager.Instance.GetPlayer().playerControl.SetWeaponByIndex(index);
     }
 }

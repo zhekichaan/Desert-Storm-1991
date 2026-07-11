@@ -16,7 +16,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private MovementDetailsSO movementDetails;
 
     private Player player;
-    private int currentWeaponIndex = 1;
+    private int currentWeaponIndex = 0;
     private float moveSpeed;
     private bool firePreviousFrame = false;
     private bool isPlayerMovementDisabled = false;
@@ -90,7 +90,7 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     private void SetStartingWeapon()
     {
-        int index = 1;
+        int index = 0;
 
         foreach (Weapon weapon in player.weaponList)
         {
@@ -233,40 +233,44 @@ public class PlayerControl : MonoBehaviour
         NextWeapon();
     }
 
-    private void SetWeaponByIndex(int weaponIndex, bool playSound = true)
+    public void SetWeaponByIndex(int weaponIndex, bool playSound = true)
     {
-        if (weaponIndex - 1 < player.weaponList.Count)
+        if (weaponIndex < player.weaponList.Count)
         {
             currentWeaponIndex = weaponIndex;
-            player.setActiveWeaponEvent.CallSetActiveWeaponEvent(player.weaponList[weaponIndex - 1]);
+            player.setActiveWeaponEvent.CallSetActiveWeaponEvent(player.weaponList[weaponIndex]);
 
             if (playSound)
                 SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.weaponSwitch);
         }
     }
 
-    private void NextWeapon()
+    public int NextWeapon()
     {
         currentWeaponIndex++;
 
-        if (currentWeaponIndex > player.weaponList.Count)
+        if (currentWeaponIndex + 1 > player.weaponList.Count)
         {
-            currentWeaponIndex = 1;
+            currentWeaponIndex = 0;
         }
 
         SetWeaponByIndex(currentWeaponIndex);
+
+        return currentWeaponIndex;
     }
 
-    private void PreviousWeapon()
+    public int PreviousWeapon()
     {
         currentWeaponIndex--;
 
-        if (currentWeaponIndex < 1)
+        if (currentWeaponIndex < 0)
         {
-            currentWeaponIndex = player.weaponList.Count;
+            currentWeaponIndex = player.weaponList.Count - 1;
         }
 
         SetWeaponByIndex(currentWeaponIndex);
+
+        return currentWeaponIndex;
     }
 
     /// <summary>
@@ -276,7 +280,7 @@ public class PlayerControl : MonoBehaviour
     {
         List<Weapon> tempWeaponList = new List<Weapon>();
 
-        Weapon currentWeapon = player.weaponList[currentWeaponIndex - 1];
+        Weapon currentWeapon = player.weaponList[currentWeaponIndex];
         currentWeapon.weaponListPosition = 1;
         tempWeaponList.Add(currentWeapon);
 
@@ -292,7 +296,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         player.weaponList = tempWeaponList;
-        currentWeaponIndex = 1;
+        currentWeaponIndex = 0;
 
         SetWeaponByIndex(currentWeaponIndex);
     }
@@ -352,6 +356,11 @@ public class PlayerControl : MonoBehaviour
     {
         isPlayerMovementDisabled = true;
         player.idleEvent.CallIdleEvent();
+    }
+
+    public int GetCurrentWeaponIndex()
+    {
+        return currentWeaponIndex;
     }
 
     #region Validation
