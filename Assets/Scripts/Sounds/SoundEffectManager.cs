@@ -30,9 +30,12 @@ public class SoundEffectManager : SingletonMonobehaviour<SoundEffectManager>
     {
         // Play sound using a sound gameobject and component from the object pool
         SoundEffect sound = (SoundEffect)PoolManager.Instance.ReuseComponent(soundEffect.soundPrefab, Vector3.zero, Quaternion.identity);
-        sound.SetSound(soundEffect);
-        sound.gameObject.SetActive(true);
-        StartCoroutine(DisableSound(sound, soundEffect.soundEffectClip.length));
+        if (sound != null)
+        {
+            sound.SetSound(soundEffect);
+            sound.gameObject.SetActive(true);
+            StartCoroutine(DisableSound(sound, soundEffect.soundEffectClip.length));
+        }
 
     }
 
