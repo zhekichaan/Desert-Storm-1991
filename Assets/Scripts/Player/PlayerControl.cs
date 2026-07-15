@@ -135,12 +135,6 @@ public class PlayerControl : MonoBehaviour
 
         Vector2 direction = moveInput;
 
-        // Adjust distance for diagonal movement (pythagoras approximation)
-        if (direction.x != 0f && direction.y != 0f)
-        {
-            direction *= 0.7f;
-        }
-
         if (direction != Vector2.zero)
         {
             if (player == null)
