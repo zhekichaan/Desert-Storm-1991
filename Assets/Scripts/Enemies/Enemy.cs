@@ -51,7 +51,50 @@ public class Enemy : MonoBehaviour
     private PolygonCollider2D polygonCollider2D;
     [HideInInspector] public SpriteRenderer[] spriteRendererArray;
     [HideInInspector] public Animator animator;
+    private Room currentRoom;
+    
+    #region Tooltip
+    [Tooltip("Populate with the blood splatter prefab to instantiate when enemy is hit")]
+    #endregion
+    [SerializeField] private GameObject bloodSplatterPrefab;
 
+    #region Tooltip
+    [Tooltip("The chance (0-1) that a blood splatter effect is spawned when the enemy takes damage")]
+    #endregion
+    [SerializeField] [Range(0f, 1f)] private float bloodSplatterChance = 0.3f;
+    
+    #region Tooltip
+    [Tooltip("How long the enemy keeps dripping smaller blood drops after being hit")]
+    #endregion
+    [SerializeField] private float bleedDuration = 2.5f;
+
+    #region Tooltip
+    [Tooltip("Minimum time between each blood drop while bleeding")]
+    #endregion
+    [SerializeField] private float bleedDropIntervalMin = 0.15f;
+
+    #region Tooltip
+    [Tooltip("Maximum time between each blood drop while bleeding")]
+    #endregion
+    [SerializeField] private float bleedDropIntervalMax = 0.5f;
+
+    #region Tooltip
+    [Tooltip("Scale multiplier applied to blood drops while bleeding (smaller than the main splatter)")]
+    #endregion
+    [SerializeField] private float bleedDropScale = 0.5f;
+    
+    #region Tooltip
+    [Tooltip("How long a blood splatter/drop stays fully visible before it starts fading")]
+    #endregion
+    [SerializeField] private float bloodVisibleDuration = 3f;
+
+    #region Tooltip
+    [Tooltip("How long the fade-out takes once it starts")]
+    #endregion
+    [SerializeField] private float bloodFadeDuration = 1.5f;
+
+    private Coroutine bleedCoroutine;
+    
     private void Awake()
     {
         healthEvent = GetComponent<HealthEvent>();
@@ -80,6 +123,12 @@ public class Enemy : MonoBehaviour
     {
         //subscribe to health event
         healthEvent.OnHealthChanged -= HealthEvent_OnHealthLost;
+        
+        if (bleedCoroutine != null)
+        {
+            StopCoroutine(bleedCoroutine);
+            bleedCoroutine = null;
+        }
     }
 
     /// <summary>
@@ -87,9 +136,98 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void HealthEvent_OnHealthLost(HealthEvent healthEvent, HealthEventArgs healthEventArgs)
     {
+        // Only spawn blood if actual damage was dealt (not on init, heal, etc.)
+        if (healthEventArgs.damageAmount > 0)
+        {
+            SpawnBloodSplatter();
+
+            if (Random.value < bloodSplatterChance)
+            {
+                StartBleeding();
+            };
+        }
+        
         if (healthEventArgs.healthAmount <= 0)
         {
             EnemyDestroyed();
+        }
+    }
+    
+    /// <summary>
+    /// Starts (or restarts/extends) the bleeding trail effect after being hit
+    /// </summary>
+    private void StartBleeding()
+    {
+        // If already bleeding, stop the old coroutine and start fresh so the timer extends
+        if (bleedCoroutine != null)
+        {
+            StopCoroutine(bleedCoroutine);
+        }
+
+        bleedCoroutine = StartCoroutine(BleedRoutine());
+    }
+
+    private IEnumerator BleedRoutine()
+    {
+        float elapsed = 0f;
+
+        while (elapsed < bleedDuration)
+        {
+            SpawnBloodDrop();
+
+            float interval = Random.Range(bleedDropIntervalMin, bleedDropIntervalMax);
+            yield return new WaitForSeconds(interval);
+            elapsed += interval;
+        }
+
+        bleedCoroutine = null;
+    }
+
+    /// <summary>
+    /// Spawns a small blood drop at the enemy's current position (used for the bleed trail)
+    /// </summary>
+    private void SpawnBloodDrop()
+    {
+        if (bloodSplatterPrefab == null) return;
+
+        GameObject bloodDrop = Instantiate(bloodSplatterPrefab, transform.position, Quaternion.identity);
+        bloodDrop.transform.Rotate(0f, 0f, Random.Range(0f, 360f));
+        bloodDrop.transform.localScale *= bleedDropScale;
+
+        if (currentRoom != null && currentRoom.instantiatedRoom != null)
+        {
+            bloodDrop.transform.SetParent(currentRoom.instantiatedRoom.transform);
+        }
+        
+        SortingGroup dropSortingGroup = bloodDrop.GetComponentInChildren<SortingGroup>();
+        if (dropSortingGroup != null)
+        {
+            SortingGroup enemySortingGroup = GetComponent<SortingGroup>();
+            dropSortingGroup.sortingLayerName = enemySortingGroup.sortingLayerName;
+            dropSortingGroup.sortingOrder = enemySortingGroup.sortingOrder - 1;
+        }
+    }
+
+    private void SpawnBloodSplatter()
+    {
+        if (bloodSplatterPrefab == null) return;
+        
+        if (Random.value > bloodSplatterChance) return;
+        
+        GameObject bloodSplatter = Instantiate(bloodSplatterPrefab, transform.position, Quaternion.identity);
+        bloodSplatter.transform.Rotate(0f, 0f, Random.Range(0f, 360f));
+        
+        if (currentRoom != null && currentRoom.instantiatedRoom != null)
+        {
+            bloodSplatter.transform.SetParent(currentRoom.instantiatedRoom.transform);
+        }
+
+        SortingGroup splatterSortingGroup = bloodSplatter.GetComponentInChildren<SortingGroup>();
+        if (splatterSortingGroup != null)
+        {
+            SortingGroup enemySortingGroup = GetComponent<SortingGroup>();
+            splatterSortingGroup.sortingLayerName = enemySortingGroup.sortingLayerName;
+            splatterSortingGroup.sortingOrder = enemySortingGroup.sortingOrder - 1;
         }
     }
 
@@ -105,16 +243,14 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Initialise the enemy
     /// </summary>
-    public void EnemyInitialization(EnemyDetailsSO enemyDetails, int enemySpawnNumber, DungeonLevelSO dungeonLevel)
+    public void EnemyInitialization(EnemyDetailsSO enemyDetails, int enemySpawnNumber, DungeonLevelSO dungeonLevel, Room room)
     {
         this.enemyDetails = enemyDetails;
+        this.currentRoom = room;
 
         SetEnemyMovementUpdateFrame(enemySpawnNumber);
-
         SetEnemyStartingHealth(dungeonLevel);
-
         SetEnemyStartingWeapon();
-
         SetEnemyAnimationSpeed();
 
         // Materialise enemy

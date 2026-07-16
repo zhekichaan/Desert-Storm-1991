@@ -263,6 +263,8 @@ MonoBehaviour:
   idleEvent: {fileID: 0}
   spriteRendererArray: []
   animator: {fileID: 0}
+  bloodSplatterPrefab: {fileID: 8370311020563485452, guid: d4b8e361c4cad47d6ad591130e01aa3d, type: 3}
+  bloodSplatterChance: 0.5
 --- !u!210 &6928776775878494944
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -567,6 +569,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 9216
   weaponShootPosition: {fileID: 742357154481585853}
+  aimDelay: 0.5
 --- !u!114 &8521340268561238764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,6 +720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 5661005105993731317}
+  currentHealth: 0
   isDamageable: 1
   enemy: {fileID: 0}
 --- !u!114 &2502315688425950182
