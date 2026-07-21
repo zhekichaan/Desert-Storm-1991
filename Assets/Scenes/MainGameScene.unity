@@ -6203,7 +6203,7 @@ MonoBehaviour:
   optionsMenu: {fileID: 335458250}
   saveMenu: {fileID: 442032205}
   dungeonLevelList:
-  - {fileID: 11400000, guid: 7ea5707d1fb74ad4b98c6087b4ee85c7, type: 2}
+  - {fileID: 11400000, guid: d4bce04898117374594fcf1a5c3b11aa, type: 2}
   - {fileID: 11400000, guid: d4bce04898117374594fcf1a5c3b11aa, type: 2}
   - {fileID: 11400000, guid: 0430c9a644903ca4f8cb90f9b5982630, type: 2}
   currentDungeonLevelListIndex: 0
@@ -19750,7 +19750,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.0625
+  orthographic size: 6.8125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -21287,6 +21287,9 @@ MonoBehaviour:
     componentType: SoundEffect
   - poolSize: 200
     prefab: {fileID: 430225475704623527, guid: ab8590a2f9ffdfa47beaa1a5e103b96b, type: 3}
+    componentType: IFireable
+  - poolSize: 10
+    prefab: {fileID: 430225475704623527, guid: cc7f8b98c72c1a341b14935470f4df27, type: 3}
     componentType: IFireable
 --- !u!4 &1973361317
 Transform:
