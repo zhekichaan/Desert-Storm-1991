@@ -272,8 +272,7 @@ public class WeaponStatusUI : MonoBehaviour
 
         // Calculate actual reload time based on reload type
         float totalReloadTime = currentWeapon.weaponDetails.isShellByShellReload
-            ? (currentWeapon.weaponDetails.weaponClipAmmoCapacity - currentWeapon.weaponClipRemainingAmmo)
-              * currentWeapon.weaponDetails.weaponShellInsertTime
+            ? currentWeapon.weaponDetails.weaponShellInsertTime
             : currentWeapon.weaponDetails.weaponReloadTime;
 
         while (currentWeapon.isWeaponReloading)

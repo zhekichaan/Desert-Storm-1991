@@ -72,6 +72,9 @@ public class FireWeapon : MonoBehaviour
                 ResetPrechargeTimer();
             }
         }
+        
+        // Cancel reloading if fired
+        // GetComponent<ReloadWeapon>().CancelReload();
     }
 
     /// <summary>
