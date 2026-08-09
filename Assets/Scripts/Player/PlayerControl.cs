@@ -304,12 +304,10 @@ public class PlayerControl : MonoBehaviour
         Weapon currentWeapon = player.activeWeapon.GetCurrentWeapon();
 
         if (currentWeapon.isWeaponReloading) return;
-
-        if (currentWeapon.weaponRemainingAmmo < currentWeapon.weaponDetails.weaponClipAmmoCapacity && !currentWeapon.weaponDetails.hasInfiniteAmmo) return;
-
         if (currentWeapon.weaponClipRemainingAmmo == currentWeapon.weaponDetails.weaponClipAmmoCapacity) return;
+        if (currentWeapon.weaponRemainingAmmo == 0 && !currentWeapon.weaponDetails.hasInfiniteAmmo) return;
 
-        player.reloadWeaponEvent.CallReloadWeaponEvent(player.activeWeapon.GetCurrentWeapon(), 0);
+        player.reloadWeaponEvent.CallReloadWeaponEvent(currentWeapon, 0);
     }
 
     #endregion Reload
