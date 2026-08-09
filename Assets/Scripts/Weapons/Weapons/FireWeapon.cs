@@ -9,7 +9,6 @@ using UnityEngine;
 public class FireWeapon : MonoBehaviour
 {
     private float firePreChargeTimer = 0f;
-    private int remainingBurstShots = 0;
     private float fireRateCoolDownTimer = 0f;
     private ActiveWeapon activeWeapon;
     private FireWeaponEvent fireWeaponEvent;
@@ -56,9 +55,6 @@ public class FireWeapon : MonoBehaviour
     /// </summary>
     private void WeaponFire(FireWeaponEventArgs fireWeaponEventArgs)
     {
-        // Handle weapon precharge timer.
-        WeaponPreCharge(fireWeaponEventArgs);
-
         // Weapon fire.
         if (fireWeaponEventArgs.fire)
         {
@@ -72,6 +68,9 @@ public class FireWeapon : MonoBehaviour
                 ResetPrechargeTimer();
             }
         }
+        
+        // Cancel reloading if fired
+        // GetComponent<ReloadWeapon>().CancelReload();
     }
 
     /// <summary>
@@ -97,10 +96,7 @@ public class FireWeapon : MonoBehaviour
     /// </summary>
     private bool IsWeaponReadyToFire(FireWeaponEventArgs fireWeaponEventArgs)
     {
-        // if there is no ammo and weapon doesn't have infinite ammo then return false.
-        if (activeWeapon.GetCurrentWeapon().weaponRemainingAmmo <= 0 && !activeWeapon.GetCurrentWeapon().weaponDetails.hasInfiniteAmmo)
-            return false;
-
+        
         if (activeWeapon.GetCurrentWeapon().weaponDetails.fireMode == WeaponFireMode.SemiAuto && fireWeaponEventArgs.firePreviousFrame)
             return false;
 
@@ -114,12 +110,7 @@ public class FireWeapon : MonoBehaviour
 
         // if no ammo in the clip and the weapon doesn't have infinite clip capacity then return false.
         if (!activeWeapon.GetCurrentWeapon().weaponDetails.hasInfiniteClipCapacity && activeWeapon.GetCurrentWeapon().weaponClipRemainingAmmo <= 0)
-        {
-            // trigger a reload weapon event.
-            reloadWeaponEvent.CallReloadWeaponEvent(activeWeapon.GetCurrentWeapon(), 0);
-
             return false;
-        }
 
         // weapon is ready to fire - return true
         return true;
@@ -186,7 +177,6 @@ public class FireWeapon : MonoBehaviour
         if (!activeWeapon.GetCurrentWeapon().weaponDetails.hasInfiniteClipCapacity)
         {
             activeWeapon.GetCurrentWeapon().weaponClipRemainingAmmo--;
-            activeWeapon.GetCurrentWeapon().weaponRemainingAmmo--;
         }
 
         // Call weapon fired event
