@@ -12,7 +12,9 @@ public class ReloadWeapon : MonoBehaviour
     private ReloadWeaponEvent reloadWeaponEvent;
     private WeaponReloadedEvent weaponReloadedEvent;
     private SetActiveWeaponEvent setActiveWeaponEvent;
+    private FireWeaponEvent fireWeaponEvent;
     private Coroutine reloadWeaponCoroutine;
+    private Weapon currentWeapon;
 
     private void Awake()
     {
@@ -20,6 +22,7 @@ public class ReloadWeapon : MonoBehaviour
         reloadWeaponEvent = GetComponent<ReloadWeaponEvent>();
         weaponReloadedEvent = GetComponent<WeaponReloadedEvent>();
         setActiveWeaponEvent = GetComponent<SetActiveWeaponEvent>();
+        fireWeaponEvent = GetComponent<FireWeaponEvent>();
     }
 
     private void OnEnable()
@@ -29,6 +32,8 @@ public class ReloadWeapon : MonoBehaviour
 
         // Subscribe to set active weapon event
         setActiveWeaponEvent.OnSetActiveWeapon += SetActiveWeaponEvent_OnSetActiveWeapon;
+
+        fireWeaponEvent.OnFireWeapon += FireWeaponEvent_OnFireWeapon;
     }
 
     private void OnDisable()
@@ -38,6 +43,8 @@ public class ReloadWeapon : MonoBehaviour
 
         // Unsubscribe from set active weapon event
         setActiveWeaponEvent.OnSetActiveWeapon -= SetActiveWeaponEvent_OnSetActiveWeapon;
+
+        fireWeaponEvent.OnFireWeapon -= FireWeaponEvent_OnFireWeapon;
     }
 
     /// <summary>
@@ -64,7 +71,7 @@ public class ReloadWeapon : MonoBehaviour
         if (weapon.weaponDetails.isShellByShellReload)
         {
             weapon.isWeaponReloading = true; 
-            reloadWeaponCoroutine = StartCoroutine(ShellByShellReloadRoutine(weapon));
+            reloadWeaponCoroutine = StartCoroutine(ShellByShellReloadRoutine());
         }
         else
         {
@@ -107,38 +114,54 @@ public class ReloadWeapon : MonoBehaviour
     /// Shell-by-shell reload: plays one slug insert sound per shell being loaded,
     /// evenly spaced across the total reload time.
     /// </summary>
-    private IEnumerator ShellByShellReloadRoutine(Weapon weapon)
+    private IEnumerator ShellByShellReloadRoutine()
     {
         
-        if (weapon.weaponDetails.weaponSlugInsertSoundEffect != null)
-            SoundEffectManager.Instance.PlaySoundEffect(weapon.weaponDetails.weaponSlugInsertSoundEffect);
+        if (currentWeapon.weaponDetails.weaponSlugInsertSoundEffect != null)
+            SoundEffectManager.Instance.PlaySoundEffect(currentWeapon.weaponDetails.weaponSlugInsertSoundEffect);
         
-        float interval = weapon.weaponDetails.weaponShellInsertTime;
+        float interval = currentWeapon.weaponDetails.weaponShellInsertTime;
 
         float elapsed = 0f;
         while (elapsed < interval)
         {
             elapsed += Time.deltaTime;
-            weapon.weaponReloadTimer += Time.deltaTime;
+            currentWeapon.weaponReloadTimer += Time.deltaTime;
             yield return null;
         }
 
-        weapon.weaponClipRemainingAmmo++;
-        if (!weapon.weaponDetails.hasInfiniteAmmo)
-            weapon.weaponRemainingAmmo--;
+        currentWeapon.weaponClipRemainingAmmo++;
+        if (!currentWeapon.weaponDetails.hasInfiniteAmmo)
+            currentWeapon.weaponRemainingAmmo--;
         
-        bool clipFull = weapon.weaponClipRemainingAmmo >= weapon.weaponDetails.weaponClipAmmoCapacity;
-        bool outOfReserveAmmo = !weapon.weaponDetails.hasInfiniteAmmo && weapon.weaponRemainingAmmo <= 0;
+        bool clipFull = currentWeapon.weaponClipRemainingAmmo >= currentWeapon.weaponDetails.weaponClipAmmoCapacity;
+        bool outOfReserveAmmo = !currentWeapon.weaponDetails.hasInfiniteAmmo && currentWeapon.weaponRemainingAmmo <= 0;
 
-        weapon.weaponReloadTimer = 0f;
-        weapon.isWeaponReloading = false;
-        weaponReloadedEvent.CallWeaponReloadedEvent(weapon);
+        currentWeapon.weaponReloadTimer = 0f;
+        currentWeapon.isWeaponReloading = false;
+        weaponReloadedEvent.CallWeaponReloadedEvent(currentWeapon);
         
         if (!clipFull && !outOfReserveAmmo)
         {
             // Load the next shell
-            reloadWeaponEvent.CallReloadWeaponEvent(weapon, 0);
+            reloadWeaponEvent.CallReloadWeaponEvent(currentWeapon, 0);
         }
+    }
+
+    public void CancelReload()
+    {
+        if (currentWeapon == null || !currentWeapon.isWeaponReloading) return;
+
+        if (reloadWeaponCoroutine != null)
+        {
+            StopCoroutine(reloadWeaponCoroutine);
+            reloadWeaponCoroutine = null;
+        }
+
+        currentWeapon.isWeaponReloading = false;
+        currentWeapon.weaponReloadTimer = 0f;
+
+        weaponReloadedEvent.CallWeaponReloadedEvent(currentWeapon);
     }
 
     /// <summary>
@@ -146,12 +169,20 @@ public class ReloadWeapon : MonoBehaviour
     /// </summary>
     private void SetActiveWeaponEvent_OnSetActiveWeapon(SetActiveWeaponEvent setActiveWeaponEvent, SetActiveWeaponEventArgs setActiveWeaponEventArgs)
     {
-        if (setActiveWeaponEventArgs.weapon.isWeaponReloading)
+        if (currentWeapon != null && currentWeapon != setActiveWeaponEventArgs.weapon)
         {
-            if (reloadWeaponCoroutine != null)
-            {
-                StopCoroutine(reloadWeaponCoroutine);
-            }
+            CancelReload();
         }
+
+        currentWeapon = setActiveWeaponEventArgs.weapon;
+    }
+
+    private void FireWeaponEvent_OnFireWeapon(FireWeaponEvent fireWeaponEvent, FireWeaponEventArgs fireWeaponEventArgs)
+    {
+        if (currentWeapon == null || !currentWeapon.isWeaponReloading) return;
+        if (!currentWeapon.weaponDetails.isShellByShellReload) return;
+        if (currentWeapon.weaponClipRemainingAmmo <= 0) return;
+
+        CancelReload();
     }
 }
