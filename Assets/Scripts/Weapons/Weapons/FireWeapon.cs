@@ -68,9 +68,6 @@ public class FireWeapon : MonoBehaviour
                 ResetPrechargeTimer();
             }
         }
-        
-        // Cancel reloading if fired
-        // GetComponent<ReloadWeapon>().CancelReload();
     }
 
     /// <summary>
@@ -96,12 +93,13 @@ public class FireWeapon : MonoBehaviour
     /// </summary>
     private bool IsWeaponReadyToFire(FireWeaponEventArgs fireWeaponEventArgs)
     {
-        
+        bool canFireWhileReloading = activeWeapon.GetCurrentWeapon().weaponDetails.isShellByShellReload && activeWeapon.GetCurrentWeapon().weaponClipRemainingAmmo > 0;
+
         if (activeWeapon.GetCurrentWeapon().weaponDetails.fireMode == WeaponFireMode.SemiAuto && fireWeaponEventArgs.firePreviousFrame)
             return false;
 
         // if the weapon is reloading then return false.
-        if (activeWeapon.GetCurrentWeapon().isWeaponReloading)
+        if (activeWeapon.GetCurrentWeapon().isWeaponReloading && !canFireWhileReloading)
             return false;
 
         // If the weapon isn't precharged or is cooling down then return false.
