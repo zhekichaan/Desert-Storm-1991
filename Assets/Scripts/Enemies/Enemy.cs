@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour
     private HealthEvent healthEvent;
     private Health health;
     [HideInInspector] public AimWeaponEvent aimWeaponEvent;
+    [HideInInspector] public ReloadWeaponEvent reloadWeaponEvent;
     [HideInInspector] public FireWeaponEvent fireWeaponEvent;
     private FireWeapon fireWeapon;
     private SetActiveWeaponEvent setActiveWeaponEvent;
@@ -52,6 +53,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public SpriteRenderer[] spriteRendererArray;
     [HideInInspector] public Animator animator;
     private Room currentRoom;
+    [HideInInspector] public Weapon activeWeapon;
     
     #region Tooltip
     [Tooltip("Populate with the blood splatter prefab to instantiate when enemy is hit")]
@@ -100,6 +102,7 @@ public class Enemy : MonoBehaviour
         healthEvent = GetComponent<HealthEvent>();
         health = GetComponent<Health>();
         aimWeaponEvent = GetComponent<AimWeaponEvent>();
+        reloadWeaponEvent = GetComponent<ReloadWeaponEvent>();
         fireWeaponEvent = GetComponent<FireWeaponEvent>();
         fireWeapon = GetComponent<FireWeapon>();
         setActiveWeaponEvent = GetComponent<SetActiveWeaponEvent>();
@@ -294,7 +297,9 @@ public class Enemy : MonoBehaviour
         {
             Weapon weapon = new Weapon() { weaponDetails = enemyDetails.enemyWeapon, weaponReloadTimer = 0f, weaponClipRemainingAmmo = enemyDetails.enemyWeapon.weaponClipAmmoCapacity, weaponRemainingAmmo = enemyDetails.enemyWeapon.weaponAmmoCapacity, isWeaponReloading = false };
 
-            //Set weapon for enemy
+            activeWeapon = weapon;
+
+            // Set weapon for enemy
             setActiveWeaponEvent.CallSetActiveWeaponEvent(weapon);
 
         }

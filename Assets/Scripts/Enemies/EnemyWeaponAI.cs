@@ -71,7 +71,13 @@ public class EnemyWeaponAI : MonoBehaviour
 
         enemy.aimWeaponEvent.CallAimWeaponEvent(enemyAimDirection, enemyAngleDegrees, weaponAngleDegrees, weaponDirection);
 
-        if (enemyDetails.enemyWeapon == null) return;
+        if (enemyDetails.enemyWeapon == null || enemy.activeWeapon == null) return;
+
+        if (enemy.activeWeapon.weaponClipRemainingAmmo <= 0 && !enemy.activeWeapon.isWeaponReloading && !enemy.activeWeapon.weaponDetails.hasInfiniteClipCapacity)
+        {
+            enemy.reloadWeaponEvent.CallReloadWeaponEvent(enemy.activeWeapon, 0);
+            return;
+        }
 
         float enemyAmmoRange = enemyDetails.enemyWeapon.weaponCurrentAmmo.ammoRange;
         bool playerInRange = playerDirectionVector.magnitude <= enemyAmmoRange;
