@@ -102,7 +102,10 @@ public class ReloadWeapon : MonoBehaviour
             yield return null;
         }
 
-        weapon.weaponRemainingAmmo -= ammoToLoad;
+        if (!weapon.weaponDetails.hasInfiniteAmmo)
+        {
+            weapon.weaponRemainingAmmo -= ammoToLoad;
+        }
         weapon.weaponClipRemainingAmmo += ammoToLoad;
         
         weapon.weaponReloadTimer = 0f;
