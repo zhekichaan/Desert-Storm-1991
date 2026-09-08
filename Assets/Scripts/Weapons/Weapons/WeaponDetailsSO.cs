@@ -40,6 +40,9 @@ public class WeaponDetailsSO : ScriptableObject
     [Tooltip("Sound effect played when the weapon fires")]
     public SoundEffectSO weaponFiringSoundEffect;
 
+    [Tooltip("Sound effect played when there is no more ammo to fire")]
+    public SoundEffectSO weaponDryFireSoundEffect;
+
     [Tooltip("Sound effect played during a standard mag-swap reload")]
     public SoundEffectSO weaponReloadSoundEffect;
 
@@ -51,6 +54,7 @@ public class WeaponDetailsSO : ScriptableObject
 
     [Tooltip("Delay in seconds before the pump sound plays after firing")]
     public float weaponPumpSoundDelay = 0.15f;
+
 
     #region Header WEAPON RELOAD CONFIGURATION
     [Space(10)]

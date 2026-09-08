@@ -18,6 +18,7 @@ MonoBehaviour:
   weaponCurrentAmmo: {fileID: 11400000, guid: e95dc27a047c82b458907c97805cd8e3, type: 2}
   weaponShootEffect: {fileID: 11400000, guid: 9773074fa0f69624c97addcddbd84b33, type: 2}
   weaponFiringSoundEffect: {fileID: 11400000, guid: 9e28a5137c890a149b9b804d2b05941a, type: 2}
+  weaponDryFireSoundEffect: {fileID: 11400000, guid: d4015aa851ae85443905624bc00f14ec, type: 2}
   weaponReloadSoundEffect: {fileID: 11400000, guid: db34e833352b3c44a9406e8c4c110386, type: 2}
   weaponSlugInsertSoundEffect: {fileID: 0}
   weaponPumpSoundEffect: {fileID: 0}
