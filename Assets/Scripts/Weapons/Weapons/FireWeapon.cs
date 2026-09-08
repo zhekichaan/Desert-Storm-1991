@@ -67,6 +67,11 @@ public class FireWeapon : MonoBehaviour
 
                 ResetPrechargeTimer();
             }
+            else if (IsClipEmpty(fireWeaponEventArgs))
+            {
+                PlayDryFireSoundEffect();
+            }
+
         }
     }
 
@@ -227,6 +232,23 @@ public class FireWeapon : MonoBehaviour
     }
 
     /// <summary>
+    /// Returns true if clip is empty and this is a fresh trigger press (not held from previous frame).
+    /// </summary>
+    private bool IsClipEmpty(FireWeaponEventArgs fireWeaponEventArgs)
+    {
+        // Don't dry-fire repeatedly while button is held on semi-auto.
+        if (activeWeapon.GetCurrentWeapon().weaponDetails.fireMode == WeaponFireMode.SemiAuto && fireWeaponEventArgs.firePreviousFrame)
+            return false;
+
+        // Don't dry-fire while reloading (reload sound/logic already covers that).
+        if (activeWeapon.GetCurrentWeapon().isWeaponReloading)
+            return false;
+
+        return !activeWeapon.GetCurrentWeapon().weaponDetails.hasInfiniteClipCapacity
+            && activeWeapon.GetCurrentWeapon().weaponClipRemainingAmmo <= 0;
+    }
+
+    /// <summary>
     /// Play weapon shooting sound effect
     /// </summary>
     private void WeaponSoundEffect()
@@ -238,6 +260,17 @@ public class FireWeapon : MonoBehaviour
 
         if (weapon.weaponDetails.weaponPumpSoundEffect != null)
             StartCoroutine(PlayPumpSoundRoutine(weapon));
+    }
+
+    /// <summary>
+    /// Play weapon dry fire sound effect (trigger pulled with empty clip).
+    /// </summary>
+    private void PlayDryFireSoundEffect()
+    {
+        Weapon weapon = activeWeapon.GetCurrentWeapon();
+
+        if (weapon.weaponDetails.weaponDryFireSoundEffect != null)
+            SoundEffectManager.Instance.PlaySoundEffect(weapon.weaponDetails.weaponDryFireSoundEffect);
     }
 
     private IEnumerator PlayPumpSoundRoutine(Weapon weapon)
