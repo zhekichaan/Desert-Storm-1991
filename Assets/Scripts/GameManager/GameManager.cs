@@ -368,8 +368,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         bool isDungeonClearOfRegularEnemies = true;
         bossRoom = null;
 
-        Debug.Log(DungeonBuilder.Instance.dungeonBuilderRoomDictionary.Count);
-
         // Loop through all dungeon rooms to see if cleared of enemies
         foreach (KeyValuePair<string, Room> keyValuePair in DungeonBuilder.Instance.dungeonBuilderRoomDictionary)
         {
@@ -392,7 +390,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         // If dungeon level completly cleared (i.e. dungeon cleared apart from boss and there is no boss room OR dungeon cleared apart from boss and boss room is also cleared)
         if ((isDungeonClearOfRegularEnemies && bossRoom == null) || (isDungeonClearOfRegularEnemies && bossRoom.room.isClearedOfEnemies))
         {
-            Debug.Log(isDungeonClearOfRegularEnemies);
             // Are there more dungeon levels then
             if (currentDungeonLevelListIndex < dungeonLevelList.Count - 1)
             {

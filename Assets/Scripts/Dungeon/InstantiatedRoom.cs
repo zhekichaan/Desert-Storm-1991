@@ -305,7 +305,6 @@ public class InstantiatedRoom : MonoBehaviour
 
     }
 
-
     /// <summary>
     /// Add opening doors if this is not a corridor room
     /// </summary>
@@ -359,7 +358,7 @@ public class InstantiatedRoom : MonoBehaviour
                     doorComponent.isBossRoomDoor = true;
 
                     // lock the door to prevent access to the room
-                    //doorComponent.LockDoor();
+                    doorComponent.LockDoor();
 
                     // Instantiate skull icon for minimap by door
                     GameObject skullIcon = Instantiate(GameResources.Instance.minimapSkullPrefab, gameObject.transform);
@@ -384,8 +383,6 @@ public class InstantiatedRoom : MonoBehaviour
 
         if (actorCollisionTilemap != null)
             actorCollisionTilemap.GetComponent<TilemapRenderer>().enabled = false;
-
-
     }
 
     /// <summary>

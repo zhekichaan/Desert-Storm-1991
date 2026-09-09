@@ -57,6 +57,7 @@ public class Door : MonoBehaviour
             isOpen = true;
             previouslyOpened = true;
             doorCollider.enabled = false;
+            doorCollider.isTrigger = true;
             doorTrigger.enabled = false;
 
             // Set open parameter in animator
@@ -77,6 +78,7 @@ public class Door : MonoBehaviour
     {
         isOpen = false;
         doorCollider.enabled = true;
+        doorCollider.isTrigger = false;
         doorTrigger.enabled = false;
 
         // set open to false to close door
