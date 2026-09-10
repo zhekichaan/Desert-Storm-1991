@@ -235,8 +235,27 @@ public class PlayerControl : MonoBehaviour
             player.setActiveWeaponEvent.CallSetActiveWeaponEvent(player.weaponList[weaponIndex]);
 
             if (playSound)
-                SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.weaponSwitch);
+            {
+                WeaponSwitchSoundEffect();
+            }
+              
+                    
         }
+    }
+
+    private void WeaponSwitchSoundEffect()
+    {
+        if (GameResources.Instance == null || GameResources.Instance.weaponSwitch == null)
+        {
+            return;
+        }
+        
+        if (SoundEffectManager.Instance == null)
+        {
+            return;
+        }
+
+        SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.weaponSwitch);
     }
 
     public int NextWeapon()
