@@ -35,6 +35,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     [SerializeField] private GameObject overviewMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject saveMenu;
+    [SerializeField] private Button saveButton;
 
     #region Header DUNGEON LEVELS
 
@@ -439,18 +440,23 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         if (gameState != GameState.gamePaused)
         {
             pauseMenu.SetActive(true);
-            //GetPlayer().playerControl.DisablePlayer();
 
             // Set game state
             previousGameState = gameState;
+
+            if (previousGameState == GameState.engagingEnemies || previousGameState == GameState.engagingBoss)
+            {
+                saveButton.interactable = false;
+            }
+
             gameState = GameState.gamePaused;
         }
         else if (gameState == GameState.gamePaused)
         {
             pauseMenu.SetActive(false);
-            //GetPlayer().playerControl.EnablePlayer();
 
             // Set game state
+            saveButton.interactable = true;
             gameState = previousGameState;
             previousGameState = GameState.gamePaused;
 
