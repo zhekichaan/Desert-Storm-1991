@@ -14,6 +14,8 @@ public class FireWeapon : MonoBehaviour
     private FireWeaponEvent fireWeaponEvent;
     private ReloadWeaponEvent reloadWeaponEvent;
     private WeaponFiredEvent weaponFiredEvent;
+    private bool hasDryFiredThisPress;
+    private int lastFireFrame = -1;
 
     private void Awake()
     {
@@ -40,6 +42,11 @@ public class FireWeapon : MonoBehaviour
     {
         // Decrease cooldown timer.
         fireRateCoolDownTimer -= Time.deltaTime;
+
+        if (lastFireFrame != Time.frameCount)
+        {
+            hasDryFiredThisPress = false;
+        }
     }
 
     /// <summary>
@@ -58,6 +65,8 @@ public class FireWeapon : MonoBehaviour
         // Weapon fire.
         if (fireWeaponEventArgs.fire)
         {
+            lastFireFrame = Time.frameCount;
+
             // Test if weapon is ready to fire.
             if (IsWeaponReadyToFire(fireWeaponEventArgs))
             {
@@ -66,10 +75,13 @@ public class FireWeapon : MonoBehaviour
                 ResetCoolDownTimer();
 
                 ResetPrechargeTimer();
+
+                hasDryFiredThisPress = false;
             }
-            else if (IsClipEmpty(fireWeaponEventArgs))
+            else if (IsClipEmpty(fireWeaponEventArgs) && !hasDryFiredThisPress)
             {
                 PlayDryFireSoundEffect();
+                hasDryFiredThisPress = true;
             }
 
         }
