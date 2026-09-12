@@ -615,6 +615,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponRotationPointTransform: {fileID: 2725795197571708820}
+  weaponShootPositionTransform: {fileID: 8906142531830084409}
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 8192
+  wallBuffer: 0.1
 --- !u!114 &-1796958693621817178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -789,6 +794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
+  currentHealth: 0
   isDamageable: 1
   enemy: {fileID: 0}
 --- !u!114 &-6647003432190255217
