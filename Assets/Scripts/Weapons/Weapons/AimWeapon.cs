@@ -10,13 +10,18 @@ public class AimWeapon : MonoBehaviour
     [Tooltip("Populate with the Transform from the child WeaponRotationPoint gameobject")]
     #endregion
     [SerializeField] private Transform weaponRotationPointTransform;
+    [SerializeField] private Transform weaponShootPositionTransform;
+    [SerializeField] private LayerMask obstacleLayerMask;
+    [SerializeField] private float wallBuffer = 0.1f;
 
     private AimWeaponEvent aimWeaponEvent;
+    private ActiveWeapon activeWeapon;
 
     private void Awake()
     {
         // Load components
         aimWeaponEvent = GetComponent<AimWeaponEvent>();
+        activeWeapon = GetComponent<ActiveWeapon>();
     }
 
     private void OnEnable()
@@ -63,6 +68,43 @@ public class AimWeapon : MonoBehaviour
                 break;
         }
 
+        ClampShootPositionToObstacle(aimAngle);
+    }
+
+    private void ClampShootPositionToObstacle(float aimAngle)
+    {
+        Weapon currentWeapon = activeWeapon.GetCurrentWeapon();
+        if (currentWeapon == null) return;
+
+        Vector3 restingLocalPosition = currentWeapon.weaponDetails.weaponShootPosition;
+
+        Vector3 aimDirectionVector = HelperUtilities.GetDirectionVectorFromAngle(aimAngle);
+
+        Vector3 restingWorldPosition = weaponShootPositionTransform.parent.TransformPoint(restingLocalPosition);
+        float weaponReach = Vector3.Distance(weaponRotationPointTransform.position, restingWorldPosition);
+
+        if (weaponReach <= 0f)
+        {
+            weaponShootPositionTransform.localPosition = restingLocalPosition;
+            return;
+        }
+
+        Vector3 pivotWorldOrigin = weaponRotationPointTransform.position;
+
+        RaycastHit2D hit = Physics2D.Raycast(pivotWorldOrigin, aimDirectionVector, weaponReach, obstacleLayerMask);
+
+        if (hit.collider != null)
+        {
+            float allowedDistance = Mathf.Max(hit.distance - wallBuffer, 0f);
+            float pullback = weaponReach - allowedDistance;
+
+            Vector3 localPullbackDirection = restingLocalPosition.normalized;
+            weaponShootPositionTransform.localPosition = restingLocalPosition - localPullbackDirection * pullback;
+        }
+        else
+        {
+            weaponShootPositionTransform.localPosition = restingLocalPosition;
+        }
     }
 
     #region Validation
