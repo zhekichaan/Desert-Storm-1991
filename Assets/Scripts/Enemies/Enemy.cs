@@ -134,6 +134,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        Minimap.Instance?.UnregisterEnemy(this);
+    }
+
     /// <summary>
     /// Handle health lost event
     /// </summary>
@@ -255,6 +260,8 @@ public class Enemy : MonoBehaviour
         SetEnemyStartingHealth(dungeonLevel);
         SetEnemyStartingWeapon();
         SetEnemyAnimationSpeed();
+
+        Minimap.Instance?.RegisterEnemy(this);
 
         // Materialise enemy
         StartCoroutine(MaterializeEnemy());

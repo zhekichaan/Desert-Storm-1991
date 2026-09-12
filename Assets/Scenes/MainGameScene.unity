@@ -9729,6 +9729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   miniMapPlayer: {fileID: 319269297}
+  miniMapEnemyPrefab: {fileID: 5324076889851444158, guid: 3b850c88c83876143b5615a101e98cdf, type: 3}
 --- !u!1 &893164467
 GameObject:
   m_ObjectHideFlags: 0
