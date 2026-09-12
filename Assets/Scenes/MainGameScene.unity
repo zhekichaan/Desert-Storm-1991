@@ -6202,6 +6202,7 @@ MonoBehaviour:
   overviewMenu: {fileID: 511151796}
   optionsMenu: {fileID: 335458250}
   saveMenu: {fileID: 442032205}
+  saveButton: {fileID: 449833005}
   dungeonLevelList:
   - {fileID: 11400000, guid: 7ea5707d1fb74ad4b98c6087b4ee85c7, type: 2}
   - {fileID: 11400000, guid: d4bce04898117374594fcf1a5c3b11aa, type: 2}
@@ -19750,7 +19751,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.40625
+  orthographic size: 8.4375
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

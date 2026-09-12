@@ -222,9 +222,22 @@ public class Chest : MonoBehaviour, IUseable
         if (chestItem == null || !chestItem.isItemMaterialized) return;
 
         Player player = GameManager.Instance.GetPlayer();
+        Weapon currentWeapon = player.activeWeapon.GetCurrentWeapon();
 
-        // Update ammo for current weapon
-        player.reloadWeaponEvent.CallReloadWeaponEvent(player.activeWeapon.GetCurrentWeapon(), ammoPercent);
+        Debug.Log(currentWeapon.weaponRemainingAmmo);   
+
+        // Work out how much ammo to add based on the pickup's percent value
+        int ammoToAdd = Mathf.RoundToInt(currentWeapon.weaponDetails.weaponAmmoCapacity * (ammoPercent / 100f));
+
+        // Add ammo directly, clamped to the weapon's max capacity
+        currentWeapon.weaponRemainingAmmo = Mathf.Min(
+            currentWeapon.weaponRemainingAmmo + ammoToAdd,
+            currentWeapon.weaponDetails.weaponAmmoCapacity
+        );
+
+        player.weaponReloadedEvent.CallWeaponReloadedEvent(currentWeapon);
+
+        Debug.Log(currentWeapon.weaponRemainingAmmo);
 
         // Play pickup sound effect
         SoundEffectManager.Instance.PlaySoundEffect(GameResources.Instance.ammoPickup);
