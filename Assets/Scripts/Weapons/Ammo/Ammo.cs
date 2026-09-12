@@ -58,10 +58,29 @@ public class Ammo : MonoBehaviour, IFireable
                     StaticEventHandler.CallMultiplierEvent(false);
                 }
 
+                if (ammoDetails.isRocketAmmo)
+                {
+                    AmmoHitEffect(); // show explosion visual
+                    DealSplashDamage(); // new method — see below
+                }
+
                 DisableAmmo();
             }
         }
+    }
 
+    private void DealSplashDamage()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, ammoDetails.splashRadius);
+
+        foreach (Collider2D hit in hits)
+        {
+            Health health = hit.GetComponent<Health>();
+            if (health != null)
+            {
+                health.TakeDamage(ammoDetails.ammoDamage);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -121,7 +140,7 @@ public class Ammo : MonoBehaviour, IFireable
     /// weaponAimDirectionVector. If this ammo is part of a pattern the ammo movement can be
     /// overriden by setting overrideAmmoMovement to true
     /// </summary>
-    public void InitialiseAmmo(AmmoDetailsSO ammoDetails, float aimAngle, float weaponAimAngle, float ammoSpeed, Vector3 weaponAimDirectionVector, bool overrideAmmoMovement = false)
+    public void InitialiseAmmo(AmmoDetailsSO ammoDetails, float aimAngle, float weaponAimAngle, float ammoSpeed, Vector3 weaponAimDirectionVector, bool overrideAmmoMovement = false, float ammoRangeOverride = 0f)
     {
         #region Ammo
 
@@ -152,7 +171,7 @@ public class Ammo : MonoBehaviour, IFireable
         }
 
         // Set ammo range
-        ammoRange = ammoDetails.ammoRange;
+        ammoRange = ammoRangeOverride > 0f ? ammoRangeOverride : ammoDetails.ammoRange;
 
         // Set ammo speed
         this.ammoSpeed = ammoSpeed;

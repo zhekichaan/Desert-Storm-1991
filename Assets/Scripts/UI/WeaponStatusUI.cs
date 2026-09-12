@@ -161,6 +161,8 @@ public class WeaponStatusUI : MonoBehaviour
             UpdateAmmoText(weapon);
             UpdateAmmoLoadedIcons(weapon);
             ResetWeaponReloadBar();
+
+            Debug.Log("In Weapon Reloaded Event Handler");
         }
     }
 
