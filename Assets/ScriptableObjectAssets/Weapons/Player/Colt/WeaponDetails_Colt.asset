@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Colt
   weaponSprite: {fileID: 21300000, guid: 4e09b39101772c545a67d894982bf8e3, type: 3}
-  weaponShootPosition: {x: 0.5, y: 0, z: 0}
+  weaponShootPosition: {x: 0.588, y: 0.187, z: 0}
   weaponCurrentAmmo: {fileID: 11400000, guid: 4a08f2f5fe3066c42a6d6b7e5575822a, type: 2}
   weaponShootEffect: {fileID: 11400000, guid: 3352eb7d5d48a3147b1d9366d3a17719, type: 2}
   weaponFiringSoundEffect: {fileID: 11400000, guid: a499365ee6626024c9711b17a575ce3e, type: 2}
