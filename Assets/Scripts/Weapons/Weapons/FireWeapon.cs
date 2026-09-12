@@ -181,8 +181,16 @@ public class FireWeapon : MonoBehaviour
             // Get Gameobject with IFireable component
             IFireable ammo = (IFireable)PoolManager.Instance.ReuseComponent(ammoPrefab, activeWeapon.GetShootPosition(), Quaternion.identity);
 
+            float rpgRange = 0f;
+
+            if (activeWeapon.GetCurrentAmmo().isRocketAmmo)
+            {
+                Player player = GameManager.Instance.GetPlayer();
+                rpgRange = Vector3.Distance(transform.position, player.transform.position);
+            }
+
             // Initialise Ammo
-            ammo.InitialiseAmmo(currentAmmo, aimAngle, weaponAimAngle, ammoSpeed, weaponAimDirectionVector);
+            ammo.InitialiseAmmo(currentAmmo, aimAngle, weaponAimAngle, ammoSpeed, weaponAimDirectionVector, false, rpgRange);
 
             // Wait for ammo per shot timegap
             yield return new WaitForSeconds(ammoSpawnInterval);
