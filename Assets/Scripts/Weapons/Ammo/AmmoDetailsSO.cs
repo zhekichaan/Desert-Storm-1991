@@ -12,6 +12,8 @@ public class AmmoDetailsSO : ScriptableObject
     #endregion
     public string ammoName;
     public bool isPlayerAmmo;
+    public bool isRocketAmmo;
+    public float splashRadius;
 
     #region Header AMMO SPRITE, PREFAB & MATERIALS
     [Space(10)]

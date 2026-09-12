@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoName: RPG Ammo
   isPlayerAmmo: 0
+  isRocketAmmo: 1
+  splashRadius: 2
   ammoSprite: {fileID: 21300000, guid: 712899d4f94c8e44eb06876df08356d5, type: 3}
   ammoPrefabArray:
   - {fileID: 430225475704623527, guid: cc7f8b98c72c1a341b14935470f4df27, type: 3}
