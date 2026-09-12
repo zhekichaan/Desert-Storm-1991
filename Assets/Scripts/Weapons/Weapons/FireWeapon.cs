@@ -12,7 +12,6 @@ public class FireWeapon : MonoBehaviour
     private float fireRateCoolDownTimer = 0f;
     private ActiveWeapon activeWeapon;
     private FireWeaponEvent fireWeaponEvent;
-    private ReloadWeaponEvent reloadWeaponEvent;
     private WeaponFiredEvent weaponFiredEvent;
     private bool hasDryFiredThisPress;
     private int lastFireFrame = -1;
@@ -22,7 +21,6 @@ public class FireWeapon : MonoBehaviour
         // Load components.
         activeWeapon = GetComponent<ActiveWeapon>();
         fireWeaponEvent = GetComponent<FireWeaponEvent>();
-        reloadWeaponEvent = GetComponent<ReloadWeaponEvent>();
         weaponFiredEvent = GetComponent<WeaponFiredEvent>();
     }
 
@@ -84,24 +82,6 @@ public class FireWeapon : MonoBehaviour
                 hasDryFiredThisPress = true;
             }
 
-        }
-    }
-
-    /// <summary>
-    /// Handle weapon precharge.
-    /// </summary>
-    private void WeaponPreCharge(FireWeaponEventArgs fireWeaponEventArgs)
-    {
-        // Weapon precharge.
-        if (fireWeaponEventArgs.firePreviousFrame)
-        {
-            // Decrease precharge timer if fire button held previous frame.
-            firePreChargeTimer -= Time.deltaTime;
-        }
-        else
-        {
-            // else reset the precharge timer.
-            ResetPrechargeTimer();
         }
     }
 

@@ -66,7 +66,7 @@ public class ActiveWeapon : MonoBehaviour
         }
 
         // Set weapon shoot position
-        weaponShootPositionTransform.localPosition = currentWeapon.weaponDetails.weaponShootPosition;
+        weaponEffectPositionTransform.localPosition = currentWeapon.weaponDetails.weaponShootPosition;
     }
     public AmmoDetailsSO GetCurrentAmmo()
     {

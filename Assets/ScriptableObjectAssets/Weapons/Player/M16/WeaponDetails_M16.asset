@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: M16
   weaponSprite: {fileID: 21300000, guid: dce4e9382e61a0f49be6bde2349c0254, type: 3}
-  weaponShootPosition: {x: 0.9, y: 0.17, z: 0}
+  weaponShootPosition: {x: 0.7, y: 0, z: 0}
   weaponCurrentAmmo: {fileID: 11400000, guid: 6670608fdaedb304e98f2e87236664f1, type: 2}
   weaponShootEffect: {fileID: 11400000, guid: 1a76644f05978ce4b87a43ef9e013635, type: 2}
   weaponFiringSoundEffect: {fileID: 11400000, guid: 568db707a9e1432419c2fb3a678a70ae, type: 2}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Shotgun
   weaponSprite: {fileID: 21300000, guid: 6579aefbbd33af94cb7b57f51b7a2dc7, type: 3}
-  weaponShootPosition: {x: 0.66, y: 0.09, z: 0}
+  weaponShootPosition: {x: 0.7, y: 0, z: 0}
   weaponCurrentAmmo: {fileID: 11400000, guid: 165874489eb93d54f9dcedbe1a1cf1fc, type: 2}
   weaponShootEffect: {fileID: 11400000, guid: 528c626942b83154ba6ef4772f3e65d4, type: 2}
   weaponFiringSoundEffect: {fileID: 11400000, guid: 20232e886d5bbf7418370f4eff85bb60, type: 2}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: LAW
   weaponSprite: {fileID: 21300000, guid: 55869e6a62f80574cbac1f3b469cddfd, type: 3}
-  weaponShootPosition: {x: 0.62, y: 0.03, z: 0}
+  weaponShootPosition: {x: 0.7, y: 0, z: 0}
   weaponCurrentAmmo: {fileID: 11400000, guid: fa8cba89f1d2f564eae1f88b9b905645, type: 2}
   weaponShootEffect: {fileID: 11400000, guid: 95cef3b0967e0ae418fafbd3a761c710, type: 2}
   weaponFiringSoundEffect: {fileID: 11400000, guid: 0ee534a553beffa429dd1a21aa45e854, type: 2}

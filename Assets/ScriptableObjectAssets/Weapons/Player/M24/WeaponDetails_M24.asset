@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: M24
   weaponSprite: {fileID: 21300000, guid: d44ce2ce0aeed6c4d9651f5b4a01f693, type: 3}
-  weaponShootPosition: {x: 0.8, y: 0.04, z: 0}
+  weaponShootPosition: {x: 0.8, y: 0, z: 0}
   weaponCurrentAmmo: {fileID: 11400000, guid: 7b9fa108e1b1ba94dac265a7596bb7f1, type: 2}
   weaponShootEffect: {fileID: 11400000, guid: 0517cb8bdb75e894b81dfc47a273d26c, type: 2}
   weaponFiringSoundEffect: {fileID: 11400000, guid: cb2f4ac8649c9b74ea54c9fdf6f5b8f6, type: 2}
