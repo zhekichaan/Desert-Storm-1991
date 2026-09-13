@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoName: M24 Ammo
   isPlayerAmmo: 1
+  isRocketAmmo: 0
+  splashRadius: 0
   ammoSprite: {fileID: 21300000, guid: 19836077f298ac9458ee90d412f71e23, type: 3}
   ammoPrefabArray:
   - {fileID: 430225475704623527, guid: 0e57045cdc6e356429026a08f5e950f5, type: 3}
@@ -21,7 +23,7 @@ MonoBehaviour:
   ammoChargeTime: 0
   ammoChargeMaterial: {fileID: 0}
   ammoHitEffect: {fileID: 11400000, guid: 832e203b5aa6f0640ad4bd88d3e6114f, type: 2}
-  ammoDamage: 13
+  ammoDamage: 25
   ammoSpeedMin: 55
   ammoSpeedMax: 55
   ammoRange: 40
