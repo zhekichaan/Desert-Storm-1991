@@ -258,6 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDetails: {fileID: 0}
   aimWeaponEvent: {fileID: 0}
+  reloadWeaponEvent: {fileID: 0}
   fireWeaponEvent: {fileID: 0}
   movementToPositionEvent: {fileID: 0}
   idleEvent: {fileID: 0}
@@ -265,6 +266,12 @@ MonoBehaviour:
   animator: {fileID: 0}
   bloodSplatterPrefab: {fileID: 8370311020563485452, guid: d4b8e361c4cad47d6ad591130e01aa3d, type: 3}
   bloodSplatterChance: 0.5
+  bleedDuration: 2.5
+  bleedDropIntervalMin: 0.15
+  bleedDropIntervalMax: 0.5
+  bleedDropScale: 0.5
+  bloodVisibleDuration: 3
+  bloodFadeDuration: 1.5
 --- !u!210 &6928776775878494944
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -595,6 +602,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponRotationPointTransform: {fileID: 2807148759946688339}
+  weaponShootPositionTransform: {fileID: 742357154481585853}
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  wallBuffer: 0.1
 --- !u!114 &9079419500195751908
 MonoBehaviour:
   m_ObjectHideFlags: 0
